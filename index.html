@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yincheng Zhou | Full Stack Engineer & Physicist</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Yincheng.</div>
+        <ul class="nav-links">
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact" class="btn-primary">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <p class="greeting">Hi, I'm <span class="highlight-text">Yincheng Zhou</span></p>
+
+                <p class="bio-snippet">
+                    I am a dual-degree student at the <strong>University of Pennsylvania</strong> in the
+                    <strong>VIPER</strong> program, pursuing <strong>Computer & Information Science</strong> and
+                    <strong>Physics</strong>.
+                    <br><br>
+                    Currently, I am the <strong>Founding Software Engineer</strong> at Franklink, Inc., building
+                    multi-agent systems. I love tackling complex problems that require both deep theoretical
+                    understanding and robust engineering execution.
+                </p>
+
+                <div class="hero-stats">
+                    <div class="stat-bubble">
+                        <span class="stat-value">UPenn</span>
+                        <span class="stat-label">University</span>
+                    </div>
+                    <div class="stat-bubble">
+                        <span class="stat-value">VIPER</span>
+                        <span class="stat-label">Program</span>
+                    </div>
+                    <div class="stat-bubble">
+                        <span class="stat-value">CIS & Physics</span>
+                        <span class="stat-label">Dual Degree</span>
+                    </div>
+                    <div class="stat-bubble">
+                        <span class="stat-value">4.0</span>
+                        <span class="stat-label">GPA</span>
+                    </div>
+                </div>
+
+                <div class="cta-group">
+                    <a href="#projects" class="btn-primary">View My Work</a>
+                    <a href="resume.pdf" target="_blank" class="btn-secondary">Resume <i
+                            class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image-wrapper">
+            <div class="hero-image-blob"></div>
+            <img src="photos/Yincheng Zhou photo.jpg" alt="Yincheng Zhou" class="hero-image">
+        </div>
+    </header>
+
+
+
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                <!-- Franklink -->
+                <div class="timeline-item">
+                    <div class="timeline-date">Oct 2025 - Present</div>
+                    <div class="timeline-content">
+                        <h3>Founding Software Engineer</h3>
+                        <h4>Franklink, Inc. (Philadelphia, PA)</h4>
+                        <p>Built an iMessage-based networking assistant end-to-end. Designed planner-to-worker
+                            multi-agent routing with retrieval + persisted user state using LangGraph.</p>
+                        <ul class="tech-stack-mini">
+                            <li>LangGraph</li>
+                            <li>AWS ECS</li>
+                            <li>Multi-Agent Systems</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Kaixin -->
+                <div class="timeline-item">
+                    <div class="timeline-date">Dec 2025 - Jan 2026</div>
+                    <div class="timeline-content">
+                        <h3>Software Engineering Intern</h3>
+                        <h4>Kaixin Technology Co.,Ltd. (Nanjing, China)</h4>
+                        <p>Engineered an NL2SQL service with SQL-first RAG. Exposed FastAPI endpoints that stream SQL,
+                            reasoning, and chart-ready results into a production fintech terminal.</p>
+                        <ul class="tech-stack-mini">
+                            <li>NL2SQL</li>
+                            <li>RAG</li>
+                            <li>FastAPI</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="project-grid">
+
+                <!-- AlphaOne -->
+                <article class="project-card">
+                    <div class="project-content">
+                        <h3>AlphaOne</h3>
+                        <p class="project-desc">Full-stack ticker sentiment dashboard. Reproducible Reddit to Postgres
+                            pipeline with rate-limit handling and NLP enrichment using spaCy & FinBERT.</p>
+                        <div class="project-tags">
+                            <span>React</span>
+                            <span>FastAPI</span>
+                            <span>PostgreSQL</span>
+                            <span>FinBERT</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="link-btn"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Franklink-iMessage -->
+                <a href="project-franklink.html" class="project-card-link">
+                    <article class="project-card">
+                        <div class="project-content">
+                            <h3>Franklink</h3>
+                            <p class="project-desc">Architected the multi-agent brain behind the first AI-native
+                                professional network. Scaled async messaging pipeline to 1,000+ users. </p>
+                            <div class="project-tags">
+                                <span>Python</span>
+                                <span>ReAct</span>
+                                <span>LangGraph</span>
+                                <span>Kafka</span>
+                                <span>AWS ECS</span>
+                            </div>
+                            <div class="project-links">
+                                <span class="link-btn"><i class="fas fa-eye"></i> View Detailed Information</span>
+                            </div>
+                        </div>
+                    </article>
+                </a>
+
+                <!-- ADK NL2SQL -->
+                <article class="project-card">
+                    <div class="project-content">
+                        <h3>NL2SQL Bot</h3>
+                        <p class="project-desc">SQL-first RAG robot with controlled execution. Safely executes
+                            SQL queries based on user intent. Smart visualization of results.</p>
+                        <div class="project-tags">
+                            <span>Python</span>
+                            <span>Google ADK</span>
+                            <span>RAG</span>
+                            <span>SQL</span>
+                            <span>LLM Agents</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="link-btn"><i class="fab fa-github"></i> Code</a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-wrapper">
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-list">
+                        <span>C++</span>
+                        <span>Java</span>
+                        <span>Python</span>
+                        <span>JavaScript</span>
+                        <span>OCaml</span>
+                        <span>SQL</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Frameworks</h3>
+                    <div class="skill-list">
+                        <span>LangGraph</span>
+                        <span>Google ADK</span>
+                        <span>Kafka</span>
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>FastAPI</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Databases & Cloud</h3>
+                    <div class="skill-list">
+                        <span>PostgreSQL</span>
+                        <span>MySQL</span>
+                        <span>AWS</span>
+                        <span>Docker</span>
+                        <span>Pandas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer">
+        <div class="container">
+            <h2>Let's Build Something Amazing.</h2>
+            <div class="social-links">
+                <a href="mailto:yzhou29@seas.upenn.edu" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/ArtysicistZ" target="_blank" title="GitHub"><i
+                        class="fab fa-github"></i></a>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 Yincheng Zhou. Built with Vanilla HTML/CSS.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
