@@ -174,36 +174,15 @@ ul {
     color: transparent;
 }
 
-.greeting::before {
-    content: '';
-    width: 40px;
-    height: 4px;
-    background: var(--primary-gradient);
-    display: inline-block;
-    border-radius: 4px;
-    /* Vertically align with text */
-    vertical-align: middle;
-    margin-right: 0.8rem;
-    position: relative;
-    top: -4px;
-    /* Optical adjustment */
-}
-
 @media (max-width: 768px) {
     .greeting {
         font-size: 1.8rem;
         /* Smaller on mobile to fit "as a whole" */
         white-space: nowrap;
         /* Attempt to force single line if it fits, or let it scroll? User asked to "combine as a whole" */
-        /* Actually, purely nowrap might cause overflow. 
-           But 1.8rem * ~20 chars = ~360px. It fits TIGHTLY on iPhone 12/13/14 (390px). 
+        /* Actually, purely nowrap might cause overflow.
+           But 1.8rem * ~20 chars = ~360px. It fits TIGHTLY on iPhone 12/13/14 (390px).
            Safe bet: use nowrap but allow overflow scroll if absolutely needed, or just trust the scaling. */
-    }
-
-    .greeting::before {
-        width: 30px;
-        /* Smaller dash on mobile */
-        margin-right: 0.5rem;
     }
 }
 
