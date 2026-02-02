@@ -508,6 +508,14 @@ ul {
     color: var(--heading-color);
 }
 
+.link-btn i {
+    transition: transform 0.3s ease;
+}
+
+.link-btn:hover i {
+    transform: translateX(4px);
+}
+
 /* Skills */
 .skills-wrapper {
     display: grid;
