@@ -131,42 +131,47 @@ ul {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 0;
-    /* Remove padding to let image fill edges */
+    padding: 6rem 0 4rem;
     position: relative;
-    overflow: hidden;
 }
 
-.hero-container {
-    width: 100%;
-    max-width: 1400px;
-    /* Wider to allow image space */
-    margin: 0 auto;
-    padding-left: 4rem;
-    /* Keep text padded */
+.hero-centered {
+    text-align: center;
+}
+
+.hero-centered .container {
     display: flex;
-    /* Switch to flex */
+    flex-direction: column;
     align-items: center;
-    position: relative;
-    z-index: 10;
 }
 
-.hero-content {
-    width: 50%;
-    /* Take up half width */
-    padding-top: 4rem;
+.hero-portrait-centered {
+    width: 280px;
+    height: 280px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 4px solid var(--border-color);
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.1),
+        0 0 0 6px rgba(37, 99, 235, 0.06);
+    margin-bottom: 2.5rem;
+}
+
+.hero-portrait-centered img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
 }
 
 .greeting {
     font-size: 2.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     font-weight: 700;
     letter-spacing: -0.5px;
-    /* Use standard block for better text wrap handling */
     display: block;
     line-height: 1.3;
 
-    /* Gradient Text for the whole line */
     background: var(--primary-gradient);
     -webkit-background-clip: text;
     background-clip: text;
@@ -212,6 +217,14 @@ ul {
     font-weight: 600;
 }
 
+.hero-tagline {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--text-color);
+    letter-spacing: 0.3px;
+    margin-bottom: 1.5rem;
+}
+
 .bio-snippet {
     font-size: 1.05rem;
     max-width: 600px;
@@ -223,6 +236,56 @@ ul {
 .bio-snippet strong {
     color: var(--heading-color);
     font-weight: 600;
+}
+
+/* About Section */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 4rem;
+    align-items: start;
+}
+
+.about-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.about-text p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-color);
+}
+
+.about-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-left: 2px solid var(--border-color);
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.sidebar-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.sidebar-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--primary-color);
+}
+
+.sidebar-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--heading-color);
+    line-height: 1.4;
 }
 
 /* Hero Stats Bubbles */
@@ -302,45 +365,7 @@ ul {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* Hero Image - Absolute Fade Layout */
-.hero-image-wrapper {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 50vw;
-    /* limit width to half screen */
-    max-width: 800px;
-    /* limit max size on huge screens */
-    height: 100vh;
-    z-index: 1;
-    /* Behind text z-index */
-    pointer-events: none;
-    /* Let clicks pass through if needed */
-}
-
-.hero-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* keep cover to fill height */
-    object-position: right top;
-    /* Anchor to RIGHT edge */
-    /* Gradient Mask: Solid on right, fade out to left */
-    mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
-    -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
-    /* Ensure it doesn't get pixelated or weird */
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
-    animation: none;
-    /* Remove blob animation */
-}
-
-/* Remove separate blob element */
-.hero-image-blob {
-    display: none;
-}
+/* Hero Portrait - Rounded Square */
 
 /* Sections */
 .section {
@@ -613,43 +638,27 @@ ul {
     }
 
     .hero {
-        padding: 8rem 2rem 4rem;
+        padding: 7rem 2rem 3rem;
         min-height: auto;
     }
 
-    .hero-container {
-        flex-direction: column;
-        text-align: center;
-        padding-left: 2rem;
-        padding-right: 2rem;
+    .hero-portrait-centered {
+        width: 140px;
+        height: 140px;
     }
 
-    .hero-image-wrapper {
-        width: 100%;
-        height: 60vh;
-        /* Taller image region */
-        top: 0;
-        /* Touch the top (navbar) */
-        bottom: auto;
-        /* Fade to bottom so text below is readable */
-        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
-        -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
-        z-index: 1;
+    .about-grid {
+        grid-template-columns: 1fr;
     }
 
-    .hero-content {
-        width: 100%;
-        /* Push text down so it starts appearing where the image fades */
-        padding-top: 55vh;
-        margin-bottom: 4rem;
-        position: relative;
-        z-index: 2;
-        /* Text on top of image fade */
-    }
-
-    .hero-image {
-        object-position: center top;
-        object-fit: cover;
+    .about-sidebar {
+        border-left: none;
+        border-top: 2px solid var(--border-color);
+        padding-left: 0;
+        padding-top: 1.5rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1.5rem 2.5rem;
     }
 
     .cta-group {
