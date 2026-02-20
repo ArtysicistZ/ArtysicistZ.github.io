@@ -845,3 +845,278 @@ ul {
     align-items: flex-start;
     /* Align text left */
 }
+
+/* Interest Tags in Hero */
+.interest-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 2.5rem;
+}
+
+.interest-tags span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    border: 1px solid var(--border-color);
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--heading-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.interest-tags span:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.15);
+}
+
+.interest-tags span i {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+}
+
+/* ========================================
+   Demo CTA Section (on project page)
+   ======================================== */
+.demo-cta-section {
+    background: linear-gradient(180deg, rgba(37, 99, 235, 0.03) 0%, rgba(6, 182, 212, 0.04) 100%);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.demo-cta-section .section-title::after {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.demo-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-color);
+    max-width: 700px;
+    margin-bottom: 4rem;
+    line-height: 1.7;
+}
+
+.step-number {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* ========================================
+   Phone Mockup (shared)
+   ======================================== */
+.phone-mockup {
+    background: #1a1a2e;
+    border-radius: 40px;
+    padding: 10px;
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    width: 260px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.phone-notch {
+    width: 100px;
+    height: 28px;
+    background: #1a1a2e;
+    border-radius: 0 0 18px 18px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.phone-screen {
+    border-radius: 30px;
+    overflow: hidden;
+    background: #f5f5f5;
+    position: relative;
+}
+
+.phone-screen img {
+    width: 100%;
+    display: block;
+}
+
+/* ========================================
+   Demo Page - Dual Phone Layout
+   ======================================== */
+.demo-page-section {
+    padding-top: 4rem;
+}
+
+.demo-row {
+    margin-bottom: 6rem;
+}
+
+.demo-row:last-child {
+    margin-bottom: 0;
+}
+
+.demo-row-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.row-label {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--secondary-color);
+    background: rgba(8, 145, 178, 0.08);
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+}
+
+/* Dual phone row: Phone | Desc Left | Divider | Desc Right | Phone */
+.dual-phone-row {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    justify-content: center;
+}
+
+.dual-descriptions {
+    flex: 1;
+    max-width: 440px;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.desc-left,
+.desc-right {
+    flex: 1;
+}
+
+.desc-left h3,
+.desc-right h3 {
+    font-size: 1.15rem;
+    color: var(--heading-color);
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.desc-left p,
+.desc-right p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-color);
+}
+
+.desc-divider {
+    width: 1px;
+    align-self: stretch;
+    background: var(--border-color);
+    flex-shrink: 0;
+}
+
+/* Single phone row (last step) */
+.single-phone-row {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    justify-content: center;
+}
+
+.single-desc {
+    max-width: 380px;
+}
+
+.single-desc h3 {
+    font-size: 1.3rem;
+    color: var(--heading-color);
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+}
+
+.single-desc p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-color);
+}
+
+/* ========================================
+   Screenshot Placeholder
+   ======================================== */
+.screenshot-placeholder-section {
+    text-align: center;
+}
+
+.screenshot-placeholder {
+    padding: 5rem 2rem;
+    border: 2px dashed var(--border-color);
+    border-radius: 20px;
+    background: rgba(37, 99, 235, 0.02);
+    color: var(--text-color);
+}
+
+.screenshot-placeholder i {
+    font-size: 3rem;
+    color: var(--border-color);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.screenshot-placeholder p {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* ========================================
+   Responsive - Demo & Interest Tags
+   ======================================== */
+@media (max-width: 900px) {
+    .dual-phone-row {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .dual-descriptions {
+        flex-direction: column;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .desc-divider {
+        width: 80%;
+        height: 1px;
+        align-self: center;
+    }
+
+    .single-phone-row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .phone-mockup {
+        width: 240px;
+    }
+
+    .demo-subtitle {
+        max-width: 100%;
+    }
+
+    .interest-tags {
+        justify-content: center;
+    }
+}

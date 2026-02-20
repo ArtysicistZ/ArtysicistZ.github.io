@@ -35,37 +35,22 @@
 
                 <p class="bio-snippet">
                     I am a dual-degree student at the <strong>University of Pennsylvania</strong> in the
-                    <strong>VIPER</strong> program, pursuing <strong>Computer & Information Science</strong> and
-                    <strong>Physics</strong>.
-                    <br><br>
-                    Currently, I am the <strong>Founding Software Engineer</strong> at Franklink, Inc., building
-                    multi-agent systems. I love tackling complex problems that require both deep theoretical
-                    understanding and robust engineering execution.
+                    <strong>VIPER</strong> program, pursuing <strong>Computer & Information Science</strong>
+                    (AI Concentration) and <strong>Physics & Astronomy</strong>.
                 </p>
-
-                <div class="hero-stats">
-                    <div class="stat-bubble">
-                        <span class="stat-value">UPenn</span>
-                        <span class="stat-label">University</span>
-                    </div>
-                    <div class="stat-bubble">
-                        <span class="stat-value">VIPER</span>
-                        <span class="stat-label">Program</span>
-                    </div>
-                    <div class="stat-bubble">
-                        <span class="stat-value">CIS & Physics</span>
-                        <span class="stat-label">Dual Degree</span>
-                    </div>
-                    <!--<div class="stat-bubble">
-                        <span class="stat-value">4.0</span>
-                        <span class="stat-label">GPA</span>
-                    </div>-->
-                </div>
+                <p class="bio-snippet">
+                    I build intelligent systems that bridge theory and practice: from multi-agent
+                    architectures powering AI-native products to sparse depth prediction algorithms for
+                    real-time robotics. Currently, I serve as the Founding Software Engineer at Franklink, Inc. and conduct research in sparse depth prediction for event cameras under Prof. Pratik Chaudhari's supervision at UPenn GRASP Laboratory.
+                </p>
+                <p class="bio-snippet">
+                    My interests span high-concurrency distributed systems,
+                    computer vision, machine learning, and AI agents — I'm driven by problems where robust engineering
+                    meets cutting-edge research.
+                </p>
 
                 <div class="cta-group">
                     <a href="#projects" class="btn-primary">View My Work</a>
-                    <!-- <a href="resume.pdf" target="_blank" class="btn-secondary">Resume <i
-                            class="fas fa-arrow-right"></i></a> -->
                 </div>
             </div>
         </div>
@@ -96,6 +81,21 @@
                         </ul>
                     </div>
                 </div>
+                <!-- GRASP Lab -->
+                <div class="timeline-item">
+                    <div class="timeline-date">Jan 2026 - Present</div>
+                    <div class="timeline-content">
+                        <h3>Machine Learning Researcher</h3>
+                        <h4>GRASP Laboratory, University of Pennsylvania (Philadelphia, PA)</h4>
+                        <p>Developing EventSPD, a sparse depth prediction algorithm for event cameras targeting
+                            2.9x inference speedup over dense baselines for real-time robotics. Advised by Prof. Pratik Chaudhari.</p>
+                        <ul class="tech-stack-mini">
+                            <li>PyTorch</li>
+                            <li>CUDA</li>
+                            <li>Computer Vision</li>
+                        </ul>
+                    </div>
+                </div>
                 <!-- Kaixin -->
                 <div class="timeline-item">
                     <div class="timeline-date">Dec 2025 - Jan 2026</div>
@@ -121,24 +121,27 @@
             <div class="project-grid">
 
                 <!-- AlphaOne -->
-                <article class="project-card">
-                    <div class="project-content">
-                        <h3>AlphaOne</h3>
-                        <p class="project-desc">Full-stack ticker sentiment dashboard. Reproducible Reddit to Postgres
-                            pipeline with rate-limit handling and NLP enrichment using spaCy & FinBERT.</p>
-                        <div class="project-tags">
-                            <span>React</span>
-                            <span>Node.js</span>
-                            <span>Spring Boot</span>
-                            <span>Celery</span>
-                            <span>PostgreSQL</span>
-                            <span>FinBERT</span>
+                <a href="project-alphaone.html" class="project-card-link">
+                    <article class="project-card">
+                        <div class="project-content">
+                            <h3>AlphaOne</h3>
+                            <p class="project-desc">Full-stack ticker sentiment dashboard. Reproducible Reddit to Postgres
+                                pipeline with rate-limit handling and NLP enrichment using spaCy & FinBERT.</p>
+                            <div class="project-tags">
+                                <span>React</span>
+                                <span>Spring Boot</span>
+                                <span>Celery</span>
+                                <span>Redis</span>
+                                <span>PostgreSQL</span>
+                                <span>FinBERT</span>
+                            </div>
+                            <div class="project-links">
+                                <span class="link-btn">View Detailed Information <i
+                                        class="fas fa-arrow-right"></i></span>
+                            </div>
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/ArtysicistZ/AlphaOne.git" target="_blank" class="link-btn"><i class="fab fa-github"></i> Code</a>
-                        </div>
-                    </div>
-                </article>
+                    </article>
+                </a>
 
                 <!-- Franklink-iMessage -->
                 <a href="project-franklink.html" class="project-card-link">
@@ -163,24 +166,26 @@
                 </a>
 
                 <!-- ADK NL2SQL -->
-                <article class="project-card">
-                    <div class="project-content">
-                        <h3>NL2SQL Bot</h3>
-                        <p class="project-desc">SQL-first RAG chatbot with controlled execution. Safely executes
-                            SQL queries based on user intent. Smart visualization of results.</p>
-                        <div class="project-tags">
-                            <span>Python</span>
-                            <span>Google ADK</span>
-                            <span>RAG</span>
-                            <span>SQL</span>
-                            <span>FastAPI</span>
+                <a href="project-nl2sql.html" class="project-card-link">
+                    <article class="project-card">
+                        <div class="project-content">
+                            <h3>NL2SQL Bot</h3>
+                            <p class="project-desc">SQL-first RAG chatbot with controlled execution. Safely executes
+                                SQL queries based on user intent. Smart visualization of results.</p>
+                            <div class="project-tags">
+                                <span>Python</span>
+                                <span>Google ADK</span>
+                                <span>RAG</span>
+                                <span>SQL</span>
+                                <span>FastAPI</span>
+                            </div>
+                            <div class="project-links">
+                                <span class="link-btn">View Detailed Information <i
+                                        class="fas fa-arrow-right"></i></span>
+                            </div>
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/ArtysicistZ/NL2SQL_Bot.git" target="_blank" class="link-btn"><i
-                                    class="fab fa-github"></i> Code</a>
-                        </div>
-                    </div>
-                </article>
+                    </article>
+                </a>
 
             </div>
         </div>
@@ -194,34 +199,36 @@
                     <h3>Languages</h3>
                     <div class="skill-list">
                         <span>C++</span>
-                        <span>Java</span>
                         <span>Python</span>
-                        <span>JavaScript</span>
+                        <span>Java</span>
+                        <span>JavaScript/TypeScript</span>
                         <span>SQL</span>
                         <span>Assembly</span>
                         <span>OCaml</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>Frameworks</h3>
+                    <h3>ML & Frameworks</h3>
                     <div class="skill-list">
+                        <span>PyTorch</span>
+                        <span>CUDA</span>
                         <span>LangGraph</span>
                         <span>Google ADK</span>
-                        <span>Kafka</span>
-                        <span>React</span>
-                        <span>Node.js</span>
-                        <span>Spring Boot</span>
+                        <span>spaCy</span>
                         <span>FastAPI</span>
+                        <span>Spring Boot</span>
+                        <span>React</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>Databases & Cloud</h3>
+                    <h3>Infrastructure</h3>
                     <div class="skill-list">
+                        <span>Kafka</span>
+                        <span>Redis</span>
                         <span>PostgreSQL</span>
-                        <span>MySQL</span>
                         <span>AWS</span>
                         <span>Docker</span>
-                        <span>Pandas</span>
+                        <span>Linux</span>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NL2SQL Bot - Yincheng Zhou</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">Yincheng.</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="#contact" class="btn-primary">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <header class="hero" style="min-height: 60vh; padding-top: 8rem;">
+        <div class="container">
+            <div class="project-header-content">
+                <span class="project-badge">Personal Project</span>
+                <h1 class="headline" style="font-size: 3.5rem;">NL2SQL Bot</h1>
+                <p class="bio-snippet">
+                    <strong>A multi-agent system that converts natural language to validated SQL with interpretive visualization.</strong><br>
+                    Ask questions in plain English — get safe, executable queries and interactive charts.
+                </p>
+                <div class="project-tags huge-tags">
+                    <span>Multi-Agent Orchestration</span>
+                    <span>SQL-First RAG</span>
+                    <span>Security-Hardened</span>
+                </div>
+                <div class="cta-group">
+                    <a href="https://github.com/ArtysicistZ/NL2SQL_Bot.git" target="_blank" class="btn-primary"><i
+                            class="fab fa-github"></i> View on GitHub</a>
+                    <a href="index.html#projects" class="btn-secondary"><i class="fas fa-arrow-left"></i> Back to
+                        Portfolio</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Overview Section -->
+    <section class="section">
+        <div class="container">
+            <div class="project-details-grid">
+
+                <div class="project-info">
+                    <h2 class="section-title">The Problem</h2>
+                    <p>
+                        Business users need answers from databases but can't write SQL. Existing chatbots either
+                        generate unsafe queries or produce results that are hard to interpret. NL2SQL Bot bridges
+                        this gap with a <strong>multi-agent pipeline</strong> that understands intent, generates
+                        validated SQL, and renders interactive visualizations — all in one conversation.
+                    </p>
+                    <p>
+                        Built during my internship at Kaixin Technology, this system was designed for
+                        <strong>production fintech terminals</strong> where correctness and security are non-negotiable.
+                        Every query passes through 18 SQL security checks before execution, with table allowlisting
+                        and dialect-aware validation across MySQL, PostgreSQL, and SQLite.
+                    </p>
+                    <p>
+                        The system uses <strong>Google ADK</strong> (Agent Development Kit) to orchestrate 5 specialized
+                        agents with session state passing, loop-guarded retry mechanisms, and per-agent LLM overrides
+                        for optimal cost-performance tuning.
+                    </p>
+                </div>
+
+                <div class="project-highlights">
+                    <h2 class="section-title">Technical Highlights</h2>
+                    <ul class="feature-list">
+                        <li>
+                            <i class="fas fa-robot"></i>
+                            <div>
+                                <h3>5-Agent Orchestration</h3>
+                                <p>Intent classifier, SQL generator, SQL validator, execution engine, and
+                                    visualization agent — each with dedicated LLM overrides and session state
+                                    passing for optimal performance.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h3>Security-First Execution</h3>
+                                <p>Read-only execution enforced through <strong>18 blocked SQL patterns</strong>,
+                                    table allowlisting, and abstracted dialect rules. No DROP, DELETE, or UPDATE
+                                    ever reaches the database.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-chart-bar"></i>
+                            <div>
+                                <h3>Smart Visualization</h3>
+                                <p>Results are automatically rendered as interactive Plotly.js charts — bar graphs,
+                                    line charts, or tables — chosen based on the query structure and data shape.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-sync-alt"></i>
+                            <div>
+                                <h3>Loop-Guarded Retry</h3>
+                                <p>When SQL validation fails, the system retries with corrective context — but with
+                                    hard iteration limits to prevent infinite loops and cost runaway.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section class="section" style="background: rgba(37,99,235,0.03);">
+        <div class="container">
+            <h2 class="section-title">Under The Hood</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3><i class="fas fa-project-diagram"></i> Agent Pipeline</h3>
+                    <p>
+                        Google ADK orchestrates a linear pipeline: <strong>Intent Classification → SQL Generation
+                        → Validation → Execution → Visualization</strong>. Each agent receives structured
+                        context from the previous stage via session state, enabling precise handoffs.
+                    </p>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-database"></i> Dialect Abstraction</h3>
+                    <p>
+                        The SQL generator produces dialect-aware queries using abstracted rules for
+                        <strong>MySQL, PostgreSQL, and SQLite</strong>. Schema introspection happens at startup,
+                        and table metadata is injected into the generation prompt for accurate column references.
+                    </p>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-stream"></i> Streaming Results</h3>
+                    <p>
+                        FastAPI endpoints stream SQL, reasoning traces, and chart-ready JSON as they're produced.
+                        The frontend receives real-time updates showing the bot's thought process alongside
+                        the final visualization.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Placeholder -->
+    <section class="section">
+        <div class="container screenshot-placeholder-section">
+            <h2 class="section-title">Product Demo</h2>
+            <div class="screenshot-placeholder">
+                <i class="fas fa-image"></i>
+                <p>Screenshots and interactive demo coming soon</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer">
+        <div class="container">
+            <h2>Let's Build Something Amazing.</h2>
+            <div class="social-links">
+                <a href="mailto:yzhou29@seas.upenn.edu"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/ArtysicistZ" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/yincheng-zhou-99a154353" target="_blank"><i
+                        class="fab fa-linkedin"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 Yincheng Zhou. Built with Vanilla HTML/CSS.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
