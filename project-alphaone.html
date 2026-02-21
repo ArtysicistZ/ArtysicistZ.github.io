@@ -29,19 +29,20 @@
     </nav>
 
     <!-- Project Hero -->
-    <header class="hero" style="min-height: 60vh; padding-top: 8rem;">
+    <header class="hero" style="min-height: 60vh; padding-top: 12rem;">
         <div class="container">
             <div class="project-header-content">
                 <span class="project-badge">Personal Project</span>
                 <h1 class="headline" style="font-size: 3.5rem;">AlphaOne</h1>
-                <p class="bio-snippet">
-                    <strong>A full-stack financial sentiment analysis platform that turns Reddit noise into actionable ticker intelligence.</strong><br>
-                    Reproducible data pipeline, NLP enrichment, and a real-time React dashboard.
+                <p class="project-tagline">
+                    Fine-tuned BERT for per-stock sentiment classification from Reddit,
+                    with LoRA adaptation and a real-time React dashboard.
                 </p>
                 <div class="project-tags huge-tags">
                     <span>Full-Stack</span>
-                    <span>NLP Pipeline</span>
-                    <span>Financial Sentiment</span>
+                    <span>Fine-Tuned BERT</span>
+                    <span>Aspect-Based Sentiment</span>
+                    <span>LoRA</span>
                 </div>
                 <div class="cta-group">
                     <a href="https://github.com/ArtysicistZ/AlphaOne.git" target="_blank" class="btn-primary"><i
@@ -61,19 +62,20 @@
                 <div class="project-info">
                     <h2 class="section-title">The Vision</h2>
                     <p>
-                        Retail investors are drowning in social media noise. AlphaOne cuts through it by
-                        building a <strong>reproducible data pipeline</strong> from Reddit to PostgreSQL,
-                        enriching every post with sentence-level NLP analysis, and surfacing ticker sentiment
-                        trends through an interactive dashboard.
+                        Retail investors are drowning in social media noise. AlphaOne cuts through it with a
+                        custom <strong>fine-tuned BERT model</strong> that classifies sentiment
+                        <em>per stock</em> within the same sentence. When a post says
+                        "AAPL is great but TSLA is doomed," the model correctly labels AAPL as bullish
+                        and TSLA as bearish, something off-the-shelf sentiment models cannot do.
                     </p>
                     <p>
-                        The system ingests posts from financial subreddits, handles Reddit's aggressive rate
-                        limits with exponential backoff, and processes each post through a
-                        <strong>multi-stage NLP pipeline</strong>: spaCy tokenization, FinBERT sentiment inference,
-                        topic tagging, and daily aggregation for trend visualization.
+                        The system ingests posts from financial subreddits through a
+                        <strong>reproducible data pipeline</strong> into PostgreSQL, processes each post through
+                        a multi-stage NLP pipeline with spaCy tokenization, entity replacement, subject-conditioned
+                        inference, and topic tagging, then surfaces ticker sentiment trends through a React dashboard.
                     </p>
                     <p>
-                        Designed with <strong>production-grade data engineering</strong> principles — concurrent-safe,
+                        Built with <strong>production-grade data engineering</strong> principles. Concurrent-safe,
                         idempotent batch ingestion with content versioning ensures no duplicate or corrupted records,
                         even under parallel worker loads.
                     </p>
@@ -86,35 +88,32 @@
                             <i class="fas fa-layer-group"></i>
                             <div>
                                 <h3>4-Service Architecture</h3>
-                                <p>React frontend, Spring Boot API, Celery/Redis workers, and PostgreSQL —
-                                    deployed as independent containers via Docker Compose for clean separation
-                                    of concerns and easy scaling.</p>
+                                <p>React, Spring Boot, Celery/Redis, and PostgreSQL, deployed
+                                    via Docker Compose.</p>
                             </div>
                         </li>
                         <li>
                             <i class="fas fa-brain"></i>
                             <div>
-                                <h3>FinBERT Sentiment Analysis</h3>
-                                <p>Sentence-level NLP pipeline using <strong>spaCy</strong> for tokenization and
-                                    <strong>FinBERT</strong> for financial domain sentiment inference. Each sentence
-                                    gets a positive/negative/neutral score with confidence.</p>
+                                <h3>Fine-Tuned BERT for Aspect-Based Sentiment</h3>
+                                <p>LoRA-adapted model classifying per-stock sentiment via entity
+                                    replacement. 47% accuracy improvement over the pretrained baseline.</p>
                             </div>
                         </li>
                         <li>
                             <i class="fas fa-database"></i>
                             <div>
                                 <h3>Idempotent Data Pipeline</h3>
-                                <p>Concurrent-safe batch ingestion with content versioning. Reddit posts are
-                                    deduplicated, versioned, and enriched — ensuring the pipeline is fully
-                                    reproducible from scratch.</p>
+                                <p>Concurrent-safe batch ingestion with content versioning and
+                                    deduplication. Fully reproducible from scratch.</p>
                             </div>
                         </li>
                         <li>
                             <i class="fas fa-chart-line"></i>
                             <div>
                                 <h3>Interactive Dashboard</h3>
-                                <p>React frontend with real-time sentiment charts, ticker-level drill-downs,
-                                    daily trend aggregation, and topic-based filtering for actionable insights.</p>
+                                <p>Real-time sentiment charts, ticker drill-downs, daily trends,
+                                    and topic-based filtering.</p>
                             </div>
                         </li>
                     </ul>
@@ -141,16 +140,16 @@
                     <h3><i class="fas fa-cogs"></i> Worker Pipeline</h3>
                     <p>
                         Celery workers with Redis broker handle the heavy lifting: Reddit scraping with
-                        rate-limit backoff, NLP enrichment (spaCy + FinBERT), topic tagging, and
-                        daily sentiment aggregation — all running as background tasks.
+                        rate-limit backoff, NLP enrichment (spaCy + fine-tuned BERT), entity replacement,
+                        subject-conditioned inference, and daily sentiment aggregation, all as background tasks.
                     </p>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-flask"></i> Fine-Tune Pipeline</h3>
+                    <h3><i class="fas fa-flask"></i> Fine-Tuning & Training</h3>
                     <p>
-                        Currently designing a fine-tuning pipeline for a <strong>subject-oriented BERT model</strong>
-                        that will improve sentiment accuracy on financial-specific language and ticker mentions
-                        beyond the general FinBERT baseline.
+                        End-to-end fine-tuning pipeline: LoRA adaptation (~1M trainable params),
+                        LLM-based data labeling (3,500+ labeled triples), and an ablation study
+                        across 4 base models to select the best performer (macro F1 0.757).
                     </p>
                 </div>
             </div>
