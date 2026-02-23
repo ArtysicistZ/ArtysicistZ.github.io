@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaOne - Yincheng Zhou</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="../index.html" class="logo">Yincheng</a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="#contact" class="btn-primary">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <header class="hero" style="min-height: 60vh; padding-top: 12rem;">
+        <div class="container">
+            <div class="project-header-content">
+                <span class="project-badge">Personal Project</span>
+                <h1 class="headline" style="font-size: 3.5rem;">AlphaOne</h1>
+                <p class="project-tagline">
+                    Full-stack sentiment platform powered by
+                    <a href="https://huggingface.co/ArtysicistZ/deberta-absa-v2" target="_blank" style="color: var(--primary-color); font-weight: 600;">DeBERTa-ABSA-v2</a>,
+                    a model we trained through 9 iterations to 82.5% accuracy on per-stock
+                    sentiment classification from Reddit.
+                </p>
+                <div class="project-tags huge-tags">
+                    <span>Full-Stack</span>
+                    <span>DeBERTa-ABSA-v2</span>
+                    <span>Aspect-Based Sentiment</span>
+                    <span>LoRA</span>
+                    <span>Docker</span>
+                </div>
+                <div class="cta-group">
+                    <a href="alphaone-demo.html" class="btn-primary"><i class="fas fa-desktop"></i> View
+                        Product Demo</a>
+                    <a href="https://github.com/ArtysicistZ/AlphaOne.git" target="_blank" class="btn-secondary"><i
+                            class="fab fa-github"></i> GitHub</a>
+                    <a href="../index.html#projects" class="btn-secondary"><i class="fas fa-arrow-left"></i> Back to
+                        Portfolio</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Overview Section -->
+    <section class="section">
+        <div class="container">
+            <div class="project-details-grid">
+
+                <div class="project-info">
+                    <h2 class="section-title">The Vision</h2>
+                    <p>
+                        Retail investors are drowning in social media noise. AlphaOne cuts through it with
+                        <a href="https://huggingface.co/ArtysicistZ/deberta-absa-v2" target="_blank"><strong>DeBERTa-ABSA-v2</strong></a>,
+                        a model we trained ourselves through 9 iterations of data curation,
+                        error analysis, and retraining to classify sentiment <em>per stock</em>
+                        within the same sentence. When a post says "AAPL is great but TSLA is doomed,"
+                        the model correctly labels AAPL as bullish and TSLA as bearish.
+                    </p>
+                    <p>
+                        The system ingests posts from 6 financial subreddits through a
+                        <strong>reproducible data pipeline</strong> into PostgreSQL, processes each post through
+                        a 3-pass NLP pipeline (CPU normalization, GPU batch inference, database commit),
+                        and surfaces ticker sentiment trends through a React dashboard with an
+                        interactive inference playground.
+                    </p>
+                    <p>
+                        Built with <strong>production-grade engineering</strong> across 6 containerized services.
+                        Concurrent-safe, idempotent batch ingestion with content versioning ensures no
+                        duplicate or corrupted records, even under parallel worker loads.
+                    </p>
+                </div>
+
+                <div class="project-highlights">
+                    <h2 class="section-title">Technical Highlights</h2>
+                    <ul class="feature-list">
+                        <li>
+                            <i class="fas fa-layer-group"></i>
+                            <div>
+                                <h3>6-Service Architecture</h3>
+                                <p>React, Spring Boot API, Celery workers, FastAPI inference
+                                    server, Redis, and PostgreSQL via Docker Compose.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-brain"></i>
+                            <div>
+                                <h3>DeBERTa-ABSA-v2</h3>
+                                <p>Our own model, trained through 9 iterations with 6,200+
+                                    hand-audited triples. 82.5% accuracy, within 3pp of
+                                    formal-news SOTA.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-fire"></i>
+                            <div>
+                                <h3>Attention Heatmap Playground</h3>
+                                <p>Interactive inference with real-time entity replacement
+                                    visualization and 12-head attention heatmaps.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-database"></i>
+                            <div>
+                                <h3>Idempotent Data Pipeline</h3>
+                                <p>3-pass batch processing with concurrent-safe ingestion,
+                                    content versioning, and lifecycle state tracking.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section class="section" style="background: rgba(37,99,235,0.03);">
+        <div class="container">
+            <h2 class="section-title">Under The Hood</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3><i class="fas fa-server"></i> Dual API Layer</h3>
+                    <p>
+                        Spring Boot serves processed sentiment data (daily trends, evidence feeds,
+                        macro aggregation). FastAPI handles real-time inference with attention extraction
+                        for the interactive playground.
+                    </p>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-cogs"></i> 3-Pass Batch Pipeline</h3>
+                    <p>
+                        Celery workers run a 3-pass pipeline: CPU normalization (sentence split, entity
+                        replacement), GPU batch inference (single forward pass), and database commit with
+                        idempotency fallback. Scheduled every 2 hours via Celery Beat.
+                    </p>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-flask"></i> Training DeBERTa-ABSA-v2</h3>
+                    <p>
+                        We built and iterated our own model across 9 versions: LLM-based labeling,
+                        615 manual corrections, error-targeted synthetic data generation (6,200+
+                        triples total), reaching 0.823 macro F1 on informal Reddit text.
+                    </p>
+                </div>
+            </div>
+
+            <div class="architecture-diagram">
+                <h3>Platform Architecture</h3>
+                <div class="screenshot-frame" style="max-width: 900px; margin: 0 auto;">
+                    <img src="../assets/images/alphaone/architecture_overview.png" alt="AlphaOne 6-service platform architecture">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Demo CTA Section -->
+    <section class="section demo-cta-section">
+        <div class="container" style="text-align: center;">
+            <h2 class="section-title" style="display: block; text-align: center;">See It In Action</h2>
+            <p class="demo-subtitle" style="max-width: 600px; margin: 0 auto 2.5rem;">
+                Walk through the full AlphaOne experience: from the operations dashboard
+                to per-ticker analytics and the interactive inference playground.
+            </p>
+            <a href="alphaone-demo.html" class="btn-primary" style="font-size: 1.1rem; padding: 1.2rem 3rem;">
+                <i class="fas fa-desktop"></i>&nbsp; View Product Demo
+            </a>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer">
+        <div class="container">
+            <h2>Let's Build Something Amazing.</h2>
+            <div class="social-links">
+                <a href="mailto:yzhou29@seas.upenn.edu"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/ArtysicistZ" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/yincheng-zhou-99a154353" target="_blank"><i
+                        class="fab fa-linkedin"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 Yincheng Zhou. Built with Vanilla HTML/CSS.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

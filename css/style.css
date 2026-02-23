@@ -861,6 +861,17 @@ ul {
     color: var(--secondary-color);
 }
 
+.architecture-diagram {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.architecture-diagram h3 {
+    font-size: 1.3rem;
+    color: var(--heading-color);
+    margin-bottom: 1.5rem;
+}
+
 @media (max-width: 900px) {
     .project-details-grid {
         grid-template-columns: 1fr;
@@ -1116,6 +1127,63 @@ ul {
 .screenshot-placeholder p {
     font-size: 1.1rem;
     font-weight: 500;
+}
+
+/* ========================================
+   Web Screenshot Demo Rows
+   ======================================== */
+.screenshot-row {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.screenshot-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.screenshot-desc {
+    flex: 0 0 280px;
+}
+
+.screenshot-desc h3 {
+    font-size: 1.3rem;
+    color: var(--heading-color);
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+}
+
+.screenshot-desc p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-color);
+}
+
+.screenshot-frame {
+    flex: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.screenshot-frame img {
+    width: 100%;
+    display: block;
+}
+
+@media (max-width: 900px) {
+    .screenshot-row,
+    .screenshot-row-reverse {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .screenshot-desc {
+        flex: none;
+        width: 100%;
+        text-align: center;
+    }
 }
 
 /* ========================================

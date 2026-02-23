@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yincheng Zhou</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@700&display=swap"
@@ -31,7 +31,7 @@
     <header class="hero hero-centered" style="padding-top: 9rem;">
         <div class="container">
             <div class="hero-portrait-centered">
-                <img src="photos/Yincheng Zhou photo.jpg" alt="Yincheng Zhou">
+                <img src="assets/images/profile.jpg" alt="Yincheng Zhou">
             </div>
             <p class="greeting">Hi, I'm Yincheng Zhou</p>
             <p class="hero-tagline">CS & Physics @ UPenn VIPER</p>
@@ -145,18 +145,20 @@
             <div class="project-grid">
 
                 <!-- AlphaOne -->
-                <a href="project-alphaone.html" class="project-card-link">
+                <a href="projects/alphaone.html" class="project-card-link">
                     <article class="project-card">
                         <div class="project-content">
                             <h3>AlphaOne</h3>
-                            <p class="project-desc">Full-stack sentiment platform with a fine-tuned BERT model
-                                for subject-aware classification from Reddit. End-to-end pipeline from ingestion to dashboard.</p>
+                            <p class="project-desc">Full-stack sentiment platform powered by DeBERTa-ABSA-v2, a model
+                                we trained to 82.5% accuracy on per-stock classification from Reddit.</p>
                             <div class="project-tags">
                                 <span>React</span>
+                                <span>Node.js</span>
                                 <span>Spring Boot</span>
-                                <span>Redis</span>
+                                <span>Fine Tuning</span>
+                                <span>BERT</span>
                                 <span>LoRA</span>
-                                <span>Fine-Tuned BERT</span>
+                                <span>Docker</span>
                             </div>
                             <div class="project-links">
                                 <span class="link-btn">View Detailed Information <i
@@ -167,7 +169,7 @@
                 </a>
 
                 <!-- Franklink-iMessage -->
-                <a href="project-franklink.html" class="project-card-link">
+                <a href="projects/franklink.html" class="project-card-link">
                     <article class="project-card">
                         <div class="project-content">
                             <h3>Franklink</h3>
@@ -189,7 +191,7 @@
                 </a>
 
                 <!-- ADK NL2SQL -->
-                <a href="project-nl2sql.html" class="project-card-link">
+                <a href="projects/nl2sql.html" class="project-card-link">
                     <article class="project-card">
                         <div class="project-content">
                             <h3>NL2SQL Bot</h3>
@@ -273,7 +275,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

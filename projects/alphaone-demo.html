@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaOne Demo - Yincheng Zhou</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="../index.html" class="logo">Yincheng</a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="alphaone.html">AlphaOne</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#contact" class="btn-primary">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Demo Hero -->
+    <header class="hero" style="min-height: 50vh; padding-top: 12rem;">
+        <div class="container">
+            <div class="project-header-content">
+                <span class="project-badge">Product Walkthrough</span>
+                <h1 class="headline" style="font-size: 3rem;">AlphaOne in Action</h1>
+                <p class="project-tagline">
+                    From real-time sentiment tracking to interactive model inference
+                    with attention visualization.
+                </p>
+                <div class="cta-group">
+                    <a href="alphaone.html" class="btn-secondary"><i class="fas fa-arrow-left"></i> Back to
+                        Technical Details</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Demo Screenshots -->
+    <section class="section demo-page-section">
+        <div class="container">
+
+            <!-- Row 1: Welcome -->
+            <div class="demo-row">
+                <div class="demo-row-header">
+                    <span class="row-label">Landing</span>
+                </div>
+                <div class="screenshot-row">
+                    <div class="screenshot-desc">
+                        <span class="step-number">01</span>
+                        <h3>Welcome Page</h3>
+                        <p>AlphaOne's landing page introduces the core value proposition:
+                            DeBERTa-ABSA-v2, a model we trained from scratch through 9 iterations
+                            to classify per-stock sentiment from Reddit's informal text.</p>
+                    </div>
+                    <div class="screenshot-frame">
+                        <img src="../assets/images/alphaone/welcome_hero.png" alt="AlphaOne welcome page">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: Playground -->
+            <div class="demo-row">
+                <div class="demo-row-header">
+                    <span class="row-label">Playground</span>
+                </div>
+                <div class="screenshot-row screenshot-row-reverse">
+                    <div class="screenshot-desc">
+                        <span class="step-number">02</span>
+                        <h3>Interactive Inference</h3>
+                        <p>Submit any sentence and target tickers for real-time classification
+                            by DeBERTa-ABSA-v2. The playground visualizes entity replacement
+                            (what the model actually sees) and renders a 12-head averaged
+                            attention heatmap for model interpretability.</p>
+                    </div>
+                    <div class="screenshot-frame">
+                        <img src="../assets/images/alphaone/playground_demo.png" alt="Interactive playground with attention heatmap">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 3: Dashboard -->
+            <div class="demo-row">
+                <div class="demo-row-header">
+                    <span class="row-label">Operations</span>
+                </div>
+                <div class="screenshot-row">
+                    <div class="screenshot-desc">
+                        <span class="step-number">03</span>
+                        <h3>Operations Dashboard</h3>
+                        <p>The terminal view shows a macro sentiment trend chart aggregated
+                            across all 88 tracked assets, with daily averages and an operations
+                            snapshot of the ingestion pipeline status.</p>
+                    </div>
+                    <div class="screenshot-frame">
+                        <img src="../assets/images/alphaone/dashboard.png" alt="AlphaOne operations dashboard">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 4: Sentiment Analytics -->
+            <div class="demo-row">
+                <div class="demo-row-header">
+                    <span class="row-label">Analytics</span>
+                </div>
+                <div class="screenshot-row screenshot-row-reverse">
+                    <div class="screenshot-desc">
+                        <span class="step-number">04</span>
+                        <h3>Per-Ticker Sentiment</h3>
+                        <p>Drill down into any stock to see its sentiment trend over time,
+                            summary statistics, and a sentence-level evidence feed showing
+                            exactly which Reddit posts drove each classification.</p>
+                    </div>
+                    <div class="screenshot-frame">
+                        <img src="../assets/images/alphaone/sentiment_sample.png" alt="Per-ticker sentiment analytics">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 5: Architecture -->
+            <div class="demo-row">
+                <div class="demo-row-header">
+                    <span class="row-label">Architecture</span>
+                </div>
+                <div class="screenshot-row">
+                    <div class="screenshot-desc">
+                        <span class="step-number">05</span>
+                        <h3>Platform Architecture</h3>
+                        <p>The full data flow across 6 containerized services: React frontend,
+                            Spring Boot API, Celery workers, FastAPI inference server, Redis broker,
+                            and PostgreSQL, all orchestrated via Docker Compose.</p>
+                    </div>
+                    <div class="screenshot-frame">
+                        <img src="../assets/images/alphaone/architecture_overview.png" alt="Platform architecture diagram">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Back CTA -->
+    <section class="section" style="padding: 4rem 0 2rem; text-align: center;">
+        <div class="container">
+            <a href="alphaone.html" class="btn-secondary" style="font-size: 1.05rem; padding: 1rem 2.5rem;">
+                <i class="fas fa-arrow-left"></i>&nbsp; Back to Technical Details
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <h2>Let's Build Something Amazing.</h2>
+            <div class="social-links">
+                <a href="mailto:yzhou29@seas.upenn.edu"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/ArtysicistZ" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/yincheng-zhou-99a154353" target="_blank"><i
+                        class="fab fa-linkedin"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 Yincheng Zhou. Built with Vanilla HTML/CSS.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
