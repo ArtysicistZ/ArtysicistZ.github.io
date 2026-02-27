@@ -1,0 +1,118 @@
+\documentclass[
+	%a4paper, % Uncomment for A4 paper size (default is US letter)
+	10pt, % Default font size, can use 10pt, 11pt or 12pt
+]{resume} % Use the resume class
+
+\usepackage{ebgaramond} % Use the EB Garamond font
+\usepackage[hidelinks]{hyperref} % Clickable email/URL without colored boxes
+\urlstyle{same} % Keep URLs in the same font as the body text
+
+%------------------------------------------------
+
+\name{Yincheng Zhou} % Your name to appear at the top
+
+% You can use the \address command up to 3 times for 3 different addresses or pieces of contact information
+% Any new lines (\\) you use in the \address commands will be converted to symbols, so each address will appear as a single line.
+
+% \address{3333 Walnut Street \\ Philadelphia, PA 19104} 
+
+% Contact line: phone, email, GitHub, website (single line, clear separators)
+\address{(267) 788-2488\;|\;\href{mailto:yzhou29@seas.upenn.edu}{yzhou29@seas.upenn.edu}\;|\;\href{https://github.com/ArtysicistZ}{github.com/ArtysicistZ}\;|\;\href{https://artysicistz.github.io}{artysicistz.github.io}} % Contact information
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Education}
+
+	\begin{rSubsection}{University of Pennsylvania}{September 2025 - Present}{Vagelos Integrated Program in Energy Research (VIPER)}{Philadelphia, PA}
+		\item Dual Degree: B.S.E. in Computer \& Information Science (AI Concentration)\;|\;B.A. in Physics \& Astronomy
+		\item Relevant Coursework: Big Data Analysis, Computer Systems, Data Structures \& Algorithms
+		\item GPA: 4.0 / 4.0
+	\end{rSubsection}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	INTERNSHIP EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Experience}
+
+	\begin{rSubsection}{Franklink, Inc.\,\,{\small\normalfont[\href{https://artysicistz.github.io/projects/franklink-demo.html}{Demo}]}}{October 2025 - Feburary 2026}{Founding Software Engineer}{Philadelphia, PA}
+		
+		\item Built an iMessage-based networking assistant, automating matchmaking via multi-agent orchestration.
+		\item Implemented persisted agent memory and selective dispatch across 5 sub-agents; cut user-facing latency by 30\%.
+		\item Designed agentic RAG with permissioned access across 8 tools (DB, email, calendar) for context-aware retrieval and recommendation.
+		\item Engineered a Kafka-backed event pipeline for LLM-heavy messaging with at-least-once delivery, idempotency keys, and retry topics (backoff) + DLQ; supported 50+ concurrent sessions while keeping p99 end-to-end latency within 40\% of single-session baseline.
+		\item Containerize services and design test/deploy workflows; ship on AWS ECS.
+
+	\end{rSubsection}
+
+%------------------------------------------------
+
+	\begin{rSubsection}{University of Pennsylvania, GRASP Laboratory}{January 2026 - Present}{Machine Learning Researcher $|$ Advisor: Prof. Pratik Chaudhari}{Philadelphia, PA}
+
+		\item Designed SPD, a sparse depth prediction algorithm that decodes only at queried pixels, achieving 2.9$\times$ inference speedup over dense baselines for real-time robotics.
+		\item Implemented a lightweight per-query decoder (11M params) with multi-scale cross-attention, cross-query communication, and deformable sampling, enabling 72 Hz inference at 256 query points with 544*416 resolution on RTX 4060.
+		\item Architected dense canvas supervision strategy to address sparse query information loss during training, enabling convergence on NYU Depth V2 without ground truth densification.
+
+	\end{rSubsection}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	PROJECTS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Projects}
+
+	\begin{rSubsection}{AlphaOne\,\,{
+		\small
+		\normalfont[\href{https://github.com/ArtysicistZ/AlphaOne.git}{GitHub}]\,
+		[\href{https://artysicistz.github.io/projects/alphaone-demo.html}{Demo}]\,
+		[\href{https://huggingface.co/ArtysicistZ/deberta-absa-v2}{Play with DeBERTa-ABSA-v2}]
+	}}{October 2025 - Present}{Tech Stack: PyTorch, HuggingFace, React, Spring Boot, FastAPI, Celery, Redis, PostgreSQL}{}
+		\item Fine-tuned DeBERTa to classify sentiment per ticker in multi-entity financial text; achieving 82.5\% accuracy (0.823 Macro F1), increasing performance by 65 percentage points from FinBERT baseline.
+		\item Curated 6,287 training triples: scraped 7 subreddits, LLM-labeled via Ollama, hand-audited 4,501 pairs (615 corrections).
+		\item Architected a 6-layered sentiment pipeline with idempotent content hashing for concurrent-safe batch ingestion.
+		\item Engineered concurrent-safe, idempotent batch ingestion with content versioning; deployed via Docker Compose.
+	\end{rSubsection}
+
+%------------------------------------------------
+
+	\begin{rSubsection}{NL2SQL Bot\,\,{\small\normalfont[\href{https://github.com/ArtysicistZ/NL2SQL_Bot.git}{GitHub}]\,[\href{https://artysicistz.github.io/projects/nl2sql.html}{Demo}]}}{December 2025 - January 2026}{Tech Stack: Google ADK, FastAPI, MySQL, Plotly.js}{}
+		\item Built a multi-agent NL2SQL system on Google ADK converting natural language to validated SQL with interpretive visualization.
+		\item Orchestrated 5 agents with session state passing, loop-guarded retry, and per-agent LLM overrides for cost-performance tuning.
+		\item Enforced read-only execution via 18 blocked SQL patterns and table allowlisting; abstracted dialect rules across MySQL, PostgreSQL, and SQLite.
+	\end{rSubsection}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	SKILLS & ACHIEVEMENTS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Skills \& Achievements}
+
+  	\begin{tabular}{@{} >{\bfseries}l @{\hspace{6ex}} l @{}}
+    	Languages & C++, Python, Java, JavaScript/TypeScript, SQL, Assembly, OCaml \\
+    	Backend \& DevTools & FastAPI, Spring Boot, Kafka, Redis, Celery, Docker, AWS, Git \\
+    	ML \& Data & PyTorch, CUDA, spaCy, Pandas, LangGraph, Google ADK \\
+		Achievements & Team China, International Science and Engineering Fair (ISEF)\\
+		& Silver Medal, Team China, International Young Physicists' Tournament (IYPT) \\
+		& Second Prize, China Mathematics Olympiad\\
+		& Second Prize, China Physics Olympiad, Second Prize\\
+		& Champion, Start-up in a Weekend Hackathon, Photon Hybrid Intelligence Track
+
+  	\end{tabular}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

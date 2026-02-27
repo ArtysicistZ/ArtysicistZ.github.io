@@ -1,0 +1,112 @@
+\documentclass[
+	%a4paper, % Uncomment for A4 paper size (default is US letter)
+	11pt, % Default font size, can use 10pt, 11pt or 12pt
+]{resume} % Use the resume class
+
+\usepackage{ebgaramond} % Use the EB Garamond font
+\usepackage[hidelinks]{hyperref} % Clickable email/URL without colored boxes
+\urlstyle{same} % Keep URLs in the same font as the body text
+
+%------------------------------------------------
+
+\name{Yincheng Zhou} % Your name to appear at the top
+
+% You can use the \address command up to 3 times for 3 different addresses or pieces of contact information
+% Any new lines (\\) you use in the \address commands will be converted to symbols, so each address will appear as a single line.
+
+\address{3333 Walnut Street \\ Philadelphia, PA 19104} 
+
+% Contact line: phone, email, GitHub, website (single line, clear separators)
+\address{(267) 788-2488\;|\;\href{mailto:yzhou29@seas.upenn.edu}{yzhou29@seas.upenn.edu}\;|\;\href{https://github.com/ArtysicistZ}{github.com/ArtysicistZ}\;|\;\href{https://artysicistz.github.io}{artysicistz.github.io}} % Contact information
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Education}
+
+	\begin{rSubsection}{University of Pennsylvania}{September 2025 - Present}{Vagelos Integrated Program in Energy Research (VIPER)}{Expected Graduation: May 2029}
+		\item Dual Degree: B.S.E. in Computer \& Information Science (AI Concentration)\;|\;B.A. in Physics \& Astronomy
+		\item Relevant Coursework: CIS 5450 Big Data Analysis, CIS 2400 Computer System, CIS 1210 Data Structure \& Algorithm 
+		\item GPA: 4.0 / 4.0
+	\end{rSubsection}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	INTERNSHIP EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Experience}
+
+	\begin{rSubsection}{Franklink, Inc. \textit{\small (\href{https://franklink.ai}{franklink.ai})}}{October 2025 - Present}{Founding Software Engineer}{Philadelphia, PA}
+		
+		\item Built an iMessage-based networking assistant end-to-end that helped the team secure \$200K+ in funding.
+		\item Implemented planner-to-worker multi-agent routing with retrieval + persisted user state using LangGraph; improved request success rate to 92\%  on internal evaluation suite.
+		\item Designed permissioned tool execution for DB/email/calendar actions to enable safe personalized matching.
+		\item Engineered a Kafka-backed event pipeline for LLM-heavy messaging with at-least-once delivery, idempotency keys, and retry topics (backoff) + DLQ; supported 1{,}000+ users and 50+ concurrent sessions while keeping p95 end-to-end latency within 30\% of single-session baseline.
+		\item Containerize services and design test/deploy workflows; ship on AWS ECS.
+
+	\end{rSubsection}
+
+%------------------------------------------------
+
+	\begin{rSubsection}{Kaixin Technology Co.,Ltd.}{December 2025 - January 2026}{Software Engineering Intern}{Nanjing, China}
+
+		\item Engineered an \href{https://github.com/ArtysicistZ/NL2SQL_Bot.git}{NL2SQL service} with SQL-first RAG with controlled execution (read-only, allowlisted tables); exposed FastAPI endpoints that stream SQL, reasoning, and chart-ready results into a production fintech terminal.
+		\item Developed a data-asset pricing workflow using Analytic Hierarchy Process (AHP) + human-in-the-loop review, reducing analysis time by 30\% and improving re-run consistency by 50\%. 
+		
+	\end{rSubsection}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	PROJECTS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Projects}
+
+	\begin{rSubsection}{AlphaOne}{October 2025 - December 2025}{Tech Stack: React, Vite, FastAPI, SQLAlchemy, PostgreSQL, spaCy, FinBERT}{}
+		\item Built a full-stack ticker sentiment dashboard with trend charts, ticker search, and evidence drilldown.
+		\item Implemented a reproducible, on-demand Reddit to Postgres pipeline with rate-limit handling, deduped upserts, and schema/indexing for fast time-series queries.
+		\item Added NLP enrichment (spaCy topic/entity tagging + FinBERT sentiment inference) and exposed chart-ready aggregation endpoints for the UI.
+	\end{rSubsection}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	ACHIEVEMENTS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Achievements}
+
+	\begin{tabular}{@{} l @{\hspace{6ex}} l @{}}
+		Team China, Finalist, International Science and Engineering Fair (ISEF) \\
+		National Second Prize, China Physics Olympaid (CPhO) \\
+		Champion, Start-up in a Weekend Hackathon, Photon Hybrid Intelligence Track
+	\end{tabular}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	SKILLS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Skills}
+
+	\begin{tabular}{@{} >{\bfseries}l @{\hspace{6ex}} l @{}}
+		Languages & C++, Java, Python, JavaScript, OCaml, SQL \\
+		Frameworks & LangGraph, Google ADK, Kafka, React, Node.js, FastAPI \\
+		Databases & MySQL, PostgreSQL, Pandas, Polars \\
+		Cloud & AWS, Docker
+	\end{tabular}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
