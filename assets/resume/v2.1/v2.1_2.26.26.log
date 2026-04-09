@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.8.26)  26 FEB 2026 20:46
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.8.26)  9 APR 2026 01:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -404,8 +404,7 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
 )
 \Hy@SectionHShift=\skip53
-)
-No file v2.1_2.26.26.aux.
+) (./v2.1_2.26.26.aux)
 \openout1 = `v2.1_2.26.26.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
@@ -428,6 +427,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 24.
 LaTeX Font Info:    ... okay on input line 24.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 24.
 LaTeX Font Info:    ... okay on input line 24.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -521,11 +521,9 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 24.
 Package hyperref Info: Link coloring OFF on input line 24.
+(./v2.1_2.26.26.out) (./v2.1_2.26.26.out)
 \@outlinefile=\write3
 \openout3 = `v2.1_2.26.26.out'.
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 LaTeX Font Info:    Font shape `TU/EBGaramond(0)/m/n' will be
 (Font)              scaled to size 20.74pt on input line 24.
@@ -548,8 +546,6 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 33.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 33.
-LaTeX Font Info:    Font shape `TU/EBGaramond(0)/b/n' will be
-(Font)              scaled to size 9.0pt on input line 46.
 LaTeX Font Info:    Font shape `TU/EBGaramond(0)/m/n' will be
 (Font)              scaled to size 9.0pt on input line 46.
 
@@ -561,22 +557,15 @@ LaTeX Font Info:    Font shape `TU/EBGaramond(0)/m/n' will be
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-08-13>
  ***********
-
-
-Package rerunfilecheck Warning: File `v2.1_2.26.26.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `v2.1_2.26.26.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
+Package rerunfilecheck Info: File `v2.1_2.26.26.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 11521 strings out of 468441
- 231563 string characters out of 5449220
- 698479 words of memory out of 5000000
- 39857 multiletter control sequences out of 15000+600000
- 627345 words of font info for 61 fonts, out of 8000000 for 9000
+ 11535 strings out of 468441
+ 231791 string characters out of 5449220
+ 701745 words of memory out of 5000000
+ 39866 multiletter control sequences out of 15000+600000
+ 627337 words of font info for 60 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  88i,6n,110p,502b,324s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
