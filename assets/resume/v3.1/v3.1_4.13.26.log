@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.8.26)  9 APR 2026 03:02
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.8.26)  13 APR 2026 02:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"d:/Code/Personal Website/assets/resume/v3.0/v3.0_4.9.26"
-(d:/Code/Personal Website/assets/resume/v3.0/v3.0_4.9.26.tex
+**"d:/Code/Personal Website/assets/resume/v3.1/v3.1_4.13.26"
+(d:/Code/Personal Website/assets/resume/v3.1/v3.1_4.13.26.tex
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-08-13>
 (d:/texlive/2025/texmf-dist/tex/latex/base/article.cls
@@ -250,8 +250,8 @@ Package fontspec Info:
 (fontspec)             <->"Times New
 (fontspec)             Roman/BI/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
 
- (./v3.0_4.9.26.aux)
-\openout1 = `v3.0_4.9.26.aux'.
+ (./v3.1_4.13.26.aux)
+\openout1 = `v3.1_4.13.26.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
 LaTeX Font Info:    ... okay on input line 55.
@@ -367,9 +367,9 @@ LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 55.
 Package hyperref Info: Link coloring ON on input line 55.
-(./v3.0_4.9.26.out) (./v3.0_4.9.26.out)
+(./v3.1_4.13.26.out) (./v3.1_4.13.26.out)
 \@outlinefile=\write3
-\openout3 = `v3.0_4.9.26.out'.
+\openout3 = `v3.1_4.13.26.out'.
 
 LaTeX Font Info:    Calculating math sizes for size <10.5> on input line 78.
 
@@ -392,15 +392,10 @@ LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <10.5> not available
 (Font)              size <10.95> substituted on input line 78.
 
 
-Overfull \hbox (9.88678pt too wide) in paragraph at lines 118--119
-[]\TU/TimesNewRoman(0)/m/n/10.5 Implemented closed-loop plan-execute-verify pipeline with live Prometheus metrics, OpenClaw browser automation, and DuckDB
- []
-
-
 
 [1
 
-] (./v3.0_4.9.26.aux)
+] (./v3.1_4.13.26.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-08-13>
@@ -410,16 +405,16 @@ L3 programming layer <2025-08-13>
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.45pt have occurred.
 
-Package rerunfilecheck Info: File `v3.0_4.9.26.out' has not changed.
+Package rerunfilecheck Info: File `v3.1_4.13.26.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
  11876 strings out of 468441
- 234053 string characters out of 5449220
- 724007 words of memory out of 5000000
+ 234073 string characters out of 5449220
+ 725012 words of memory out of 5000000
  40221 multiletter control sequences out of 15000+600000
  628383 words of font info for 67 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,5n,93p,348b,325s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,5n,93p,362b,325s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on v3.0_4.9.26.pdf (1 page).
+Output written on v3.1_4.13.26.pdf (1 page).
