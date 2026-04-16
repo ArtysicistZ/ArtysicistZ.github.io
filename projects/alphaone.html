@@ -20,7 +20,7 @@
         <a href="../index.html" class="logo">Yincheng</a>
         <ul class="nav-links">
             <li><a href="../index.html">Home</a></li>
-            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="../index.html#projects">Projects</a></li>
             <li><a href="#contact" class="btn-primary">Contact</a></li>
         </ul>
         <div class="hamburger">
@@ -35,10 +35,10 @@
                 <span class="project-badge">Personal Project</span>
                 <h1 class="headline" style="font-size: 3.5rem;">AlphaOne</h1>
                 <p class="project-tagline">
-                    Full-stack sentiment platform powered by
-                    <a href="https://huggingface.co/ArtysicistZ/deberta-absa-v2" target="_blank" style="color: var(--primary-color); font-weight: 600;">DeBERTa-ABSA-v2</a>,
-                    a model we trained through 9 iterations to 82.5% accuracy on per-stock
-                    sentiment classification from Reddit.
+                    Per-ticker financial sentiment platform powered by
+                    <a href="https://huggingface.co/ArtysicistZ/deberta-absa-v2" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color); font-weight: 600;">DeBERTa-ABSA-v2</a>,
+                    fine-tuned to 82.5% accuracy (+65pp over FinBERT) on aspect-based sentiment
+                    from multi-entity financial text, with 6,287 curated training triples.
                 </p>
                 <div class="project-tags huge-tags">
                     <span>Full-Stack</span>
@@ -50,7 +50,7 @@
                 <div class="cta-group">
                     <a href="alphaone-demo.html" class="btn-primary"><i class="fas fa-desktop"></i> View
                         Product Demo</a>
-                    <a href="https://github.com/ArtysicistZ/AlphaOne.git" target="_blank" class="btn-secondary"><i
+                    <a href="https://github.com/ArtysicistZ/AlphaOne.git" target="_blank" rel="noopener noreferrer" class="btn-secondary"><i
                             class="fab fa-github"></i> GitHub</a>
                     <a href="../index.html#projects" class="btn-secondary"><i class="fas fa-arrow-left"></i> Back to
                         Portfolio</a>
@@ -68,23 +68,24 @@
                     <h2 class="section-title">The Vision</h2>
                     <p>
                         Retail investors are drowning in social media noise. AlphaOne cuts through it with
-                        <a href="https://huggingface.co/ArtysicistZ/deberta-absa-v2" target="_blank"><strong>DeBERTa-ABSA-v2</strong></a>,
-                        a model we trained ourselves through 9 iterations of data curation,
-                        error analysis, and retraining to classify sentiment <em>per stock</em>
-                        within the same sentence. When a post says "AAPL is great but TSLA is doomed,"
-                        the model correctly labels AAPL as bullish and TSLA as bearish.
+                        <a href="https://huggingface.co/ArtysicistZ/deberta-absa-v2" target="_blank" rel="noopener noreferrer"><strong>DeBERTa-ABSA-v2</strong></a>,
+                        fine-tuned via LoRA on DeBERTa-v3-base (184M params) with entity replacement
+                        to classify sentiment <em>per stock</em> within the same sentence. When a post says
+                        "AAPL is great but TSLA is doomed," the model correctly labels AAPL as bullish
+                        and TSLA as bearish &mdash; achieving 82.5% accuracy, 65pp above FinBERT.
                     </p>
                     <p>
-                        The system ingests posts from 6 financial subreddits through a
-                        <strong>reproducible data pipeline</strong> into PostgreSQL, processes each post through
-                        a 3-pass NLP pipeline (CPU normalization, GPU batch inference, database commit),
-                        and surfaces ticker sentiment trends through a React dashboard with an
-                        interactive inference playground.
+                        The system ingests posts from <strong>7 financial subreddits</strong> (wallstreetbets,
+                        stocks, investing, stockmarket, options, dividends, ValueInvesting) through a
+                        <strong>3-pass batch NLP pipeline</strong>: sentence splitting and entity replacement,
+                        single-batch GPU inference, and database commit. Claim-based row locking via
+                        PostgreSQL <code>SELECT ... FOR UPDATE SKIP LOCKED</code> ensures concurrent-safe
+                        ingestion across parallel workers.
                     </p>
                     <p>
-                        Built with <strong>production-grade engineering</strong> across 6 containerized services.
-                        Concurrent-safe, idempotent batch ingestion with content versioning ensures no
-                        duplicate or corrupted records, even under parallel worker loads.
+                        Built across <strong>6 containerized services</strong> with a React dashboard
+                        serving per-ticker sentiment trends and an interactive inference playground
+                        with 12-head attention heatmaps.
                     </p>
                 </div>
 
@@ -191,8 +192,8 @@
             <h2>Let's Build Something Amazing.</h2>
             <div class="social-links">
                 <a href="mailto:yzhou29@seas.upenn.edu"><i class="fas fa-envelope"></i></a>
-                <a href="https://github.com/ArtysicistZ" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/yincheng-zhou-99a154353" target="_blank"><i
+                <a href="https://github.com/ArtysicistZ" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/yincheng-zhou-99a154353" target="_blank" rel="noopener noreferrer"><i
                         class="fab fa-linkedin"></i></a>
             </div>
             <p class="copyright">&copy; 2026 Yincheng Zhou. Built with Vanilla HTML/CSS.</p>

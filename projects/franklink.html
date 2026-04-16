@@ -32,16 +32,18 @@
     <header class="hero" style="min-height: 60vh; padding-top: 12rem;">
         <div class="container">
             <div class="project-header-content">
-                <span class="project-badge">Role: Founding Software Engineer</span>
+                <span class="project-badge">Founding Software Engineer &mdash; Oct 2025 to Feb 2026</span>
                 <h1 class="headline" style="font-size: 3.5rem;">Franklink</h1>
                 <p class="project-tagline">
-                    Architected the multi-agent brain behind the first AI-native professional network,
-                    from zero to one.
+                    Architected the multi-agent brain behind the world's first AI-native professional
+                    network &mdash; iMessage-based orchestration with persisted memory, selective dispatch
+                    across 5 sub-agents, and a Kafka-backed event pipeline sustaining 50+ concurrent sessions.
                 </p>
                 <div class="project-tags huge-tags">
                     <span>Multi-Agent Systems</span>
-                    <span>Scalable Architecture</span>
-                    <span>AWS</span>
+                    <span>Kafka</span>
+                    <span>AWS ECS</span>
+                    <span>Agentic RAG</span>
                 </div>
                 <div class="cta-group">
                     <a href="franklink-demo.html" class="btn-primary"><i class="fas fa-mobile-alt"></i> View Product Demo</a>
@@ -59,24 +61,26 @@
                 <div class="project-info">
                     <h2 class="section-title">From Zero to One</h2>
                     <p>
-                        As the <strong>Founding Software Engineer</strong>, I took charge of the complete lifecycle of
-                        Franklink platform: from the initial architectural diagrams to the production deployment on AWS.
-                        My core responsibility was translating the product vision into a tangible technical reality,
-                        selecting the right stack to balance rapid iteration with long-term stability.
+                        As the <strong>Founding Software Engineer</strong>, I owned the complete lifecycle of
+                        the Franklink platform: from initial architecture to production deployment on AWS ECS.
+                        I designed an iMessage-based multi-agent orchestration layer with persisted memory,
+                        selective dispatch across <strong>5 sub-agents</strong> (onboarding, networking,
+                        group chat networking, group chat maintenance, profile updates), and agentic RAG
+                        over <strong>8 permissioned tools</strong> (database, email, calendar, profile,
+                        networking, group chat, conversation sync, email extraction).
                     </p>
                     <p>
-                        I co-designed a <strong>Planner-Worker</strong> multi-agent architecture
-                        that moves beyond simple chatbots. By decoupling "reasoning" (understanding intent) from
-                        "execution" (scheduling, database lookups), we created a robust system that could handle
-                        complex,
-                        multi-step networking requests with high reliability and verifiable state transitions.
+                        The conductor agent (InteractionAgent) analyzes incoming messages and routes to
+                        specialized ExecutionAgents via a ReAct loop. Each agent accesses enriched user
+                        context pulled from Supabase profiles and a Zep knowledge graph storing
+                        conversation history and email activity analysis.
                     </p>
                     <p>
-                        Beyond just the AI logic, I focused heavily on reliability and scale. I personally
-                        engineered the Kafka-based <strong>concurrency control mechanism</strong> that ensures
-                        thread-safety
-                        across distributed agents. I also pioneered a safe tool execution layer that ensures the AI
-                        handles sensitive user data (emails, calendars) securely.
+                        I engineered a <strong>Kafka-backed event pipeline</strong> with at-least-once delivery,
+                        idempotency keys stored in Redis (24h TTL), and a 3-tier retry strategy (30s, 2m, 10m)
+                        with dead letter queue after 6 attempts. The system sustained <strong>50+ concurrent
+                        sessions</strong> with p99 latency within 40% of single-session baseline, using
+                        keyed concurrency and 1.5s message coalescing.
                     </p>
                 </div>
 
@@ -86,29 +90,29 @@
                         <li>
                             <i class="fas fa-sitemap"></i>
                             <div>
-                                <h3>Multi-Agent Cooperation</h3>
-                                <p>Co-architected a system where a central "Reasoning Agent" delegates specialized
-                                    sub-tasks to focused "Worker Agents", enabling complex problem-solving that a single
-                                    model couldn't handle.</p>
+                                <h3>5 Sub-Agent Orchestration</h3>
+                                <p>An InteractionAgent conductor selectively dispatches to 5 specialized
+                                    ExecutionAgents via ReAct loops, each with dedicated tools and persisted
+                                    memory through Zep knowledge graphs and Supabase.</p>
                             </div>
                         </li>
                         <li>
                             <i class="fas fa-network-wired"></i>
                             <div>
-                                <h3>Concurrency & Scalability</h3>
-                                <p>Engineered a distributed backbone designed for <strong>massive scale</strong>. I
-                                    implemented a custom Kafka protocol with strict <strong>idempotency keys</strong>
-                                    and <strong>retry policies</strong>, ensuring reliable, exactly-once processing even
-                                    under high concurrent load.</p>
+                                <h3>Kafka Event Pipeline</h3>
+                                <p>At-least-once delivery with idempotency keys in Redis, 3-tier retry
+                                    (30s/2m/10m) with DLQ after 6 attempts. Keyed concurrency and partition
+                                    flow control sustain <strong>50+ concurrent sessions</strong> with p99
+                                    latency within 40% of single-session baseline.</p>
                             </div>
                         </li>
                         <li>
-                            <i class="fas fa-cloud-upload-alt"></i>
+                            <i class="fas fa-tools"></i>
                             <div>
-                                <h3>Cloud Deployment & DevOps</h3>
-                                <p>Designed the complete <strong>Docker</strong> and <strong>AWS ECS</strong>
-                                    testing and deployment workflow. This containerized pipeline streamlined testing and
-                                    production releases, allowing the team to iterate rapidly with confidence.</p>
+                                <h3>8 Permissioned Tools</h3>
+                                <p>Agentic RAG over database, email, calendar, profile management,
+                                    networking, group chat, conversation sync, and email extraction.
+                                    Tools receive enriched context from Zep facts and Supabase profiles.</p>
                             </div>
                         </li>
                     </ul>
@@ -126,25 +130,27 @@
                 <div class="tech-card">
                     <h3><i class="fas fa-cogs"></i> Orchestration Engine</h3>
                     <p>
-                        The system is built on a graph-based orchestration framework. This allows for validatible
-                        state transitions and "human-in-the-loop" checkpoints, ensuring that the AI operates
-                        within safe bounds while autonomy is maximized.
+                        A stateless task-based design: the InteractionAgent (conductor) classifies intent
+                        and dispatches to specialized ExecutionAgents via Task definitions. No checkpoint
+                        serialization overhead &mdash; memory lives in Zep and Supabase. Message
+                        coalescing with a 1.5s debounce window prevents redundant agent invocations.
                     </p>
                 </div>
                 <div class="tech-card">
-                    <h3><i class="fas fa-memory"></i> Persisted Context</h3>
+                    <h3><i class="fas fa-memory"></i> Persisted Memory</h3>
                     <p>
-                        We designed a state management layer that persists user context across sessions.
-                        This enables the agents to cooperate with short-term and long-term memory, understanding
-                        user's evolving demands and value propositions over months of engagement.
+                        Three-tier memory: ExecutionMemory (per-task scratchpad), InteractionMemory
+                        (cross-task state), and TaskHistorySaver (persistent logs). Zep knowledge
+                        graph stores enriched user facts from conversation history and email
+                        activity analysis for long-term context.
                     </p>
                 </div>
                 <div class="tech-card">
                     <h3><i class="fas fa-server"></i> Cloud Infrastructure</h3>
                     <p>
-                        The platform runs on containerized microservices. My key contribution was the <strong>Kafka
-                            event pipeline</strong> which decoupled agent thought processes from user I/O, allowing for
-                        independent scaling of reasoning nodes.
+                        Docker Compose orchestrates Kafka, workers, and the ingest service. The Kafka
+                        pipeline uses 5 topics (inbound, 3 retry tiers, DLQ) with 12 partitions and
+                        3x replication. Deployed on AWS ECS with IAM authentication for MSK.
                     </p>
                 </div>
             </div>
@@ -164,13 +170,13 @@
         </div>
     </section>
 
-    <footer class="footer">
+    <footer id="contact" class="footer">
         <div class="container">
             <h2>Let's Build Something Amazing.</h2>
             <div class="social-links">
                 <a href="mailto:yzhou29@seas.upenn.edu"><i class="fas fa-envelope"></i></a>
-                <a href="https://github.com/ArtysicistZ" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/yincheng-zhou-99a154353" target="_blank"><i
+                <a href="https://github.com/ArtysicistZ" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/yincheng-zhou-99a154353" target="_blank" rel="noopener noreferrer"><i
                         class="fab fa-linkedin"></i></a>
             </div>
             <p class="copyright">&copy; 2026 Yincheng Zhou. Built with Vanilla HTML/CSS.</p>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IncidentGuard - Yincheng Zhou</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="../index.html" class="logo">Yincheng</a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#projects">Projects</a></li>
+            <li><a href="#contact" class="btn-primary">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <header class="hero" style="min-height: 60vh; padding-top: 12rem;">
+        <div class="container">
+            <div class="project-header-content">
+                <span class="project-badge">Multi-Agent Systems</span>
+                <h1 class="headline" style="font-size: 3.5rem;">IncidentGuard</h1>
+                <p class="project-tagline">
+                    A multi-agent incident remediation system that simulates outcomes before
+                    execution to reject unsafe plans, achieving 46% faster recovery with a
+                    closed-loop plan-execute-verify pipeline backed by Prometheus metrics.
+                </p>
+                <div class="project-tags huge-tags">
+                    <span>Multi-Agent</span>
+                    <span>Counterfactual Simulation</span>
+                    <span>Prometheus</span>
+                    <span>Graceful Degradation</span>
+                </div>
+                <div class="cta-group">
+                    <a href="https://github.com/hanshengzhu0001/stratusxpennai" target="_blank" rel="noopener noreferrer"
+                        class="btn-primary"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="../index.html#projects" class="btn-secondary"><i class="fas fa-arrow-left"></i> Back to
+                        Portfolio</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Overview Section -->
+    <section class="section">
+        <div class="container">
+            <div class="project-details-grid">
+
+                <div class="project-info">
+                    <h2 class="section-title">The Problem</h2>
+                    <p>
+                        When production incidents hit, on-call engineers face immense pressure to
+                        act fast. But rushing a fix can make things worse &mdash; a hasty retry
+                        storm amplifies a partial outage into a full cascade. IncidentGuard
+                        introduces a <strong>simulate-before-execute</strong> paradigm: every
+                        candidate remediation action is run through a discrete-event simulation
+                        to predict its outcome before it touches production.
+                    </p>
+                    <p>
+                        The system handles <strong>4 failure scenarios</strong>: retry death spirals,
+                        payment gateway flapping, seat hold clogging, and regional saturation.
+                        For each, it generates a ranked action list using the Stratus counterfactual
+                        reasoning API, with predicted effects on latency, error rates, retry storms,
+                        and blast radius.
+                    </p>
+                    <p>
+                        After execution, the pipeline closes the loop by querying
+                        <strong>Prometheus metrics</strong> to verify that the predicted recovery
+                        actually materialized, comparing drift scores between expected and observed
+                        outcomes.
+                    </p>
+                </div>
+
+                <div class="project-highlights">
+                    <h2 class="section-title">Technical Highlights</h2>
+                    <ul class="feature-list">
+                        <li>
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h3>Simulate Before Execute</h3>
+                                <p>Discrete-event simulation via SimPy predicts the impact of each
+                                    candidate action. Unsafe plans are rejected before they reach
+                                    production, preventing cascade failures.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-sync-alt"></i>
+                            <div>
+                                <h3>Closed-Loop Pipeline</h3>
+                                <p>Plan &rarr; Execute &rarr; Verify. After action execution,
+                                    Prometheus metrics are queried to compare predicted vs. actual
+                                    recovery, producing a structured incident report.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-layer-group"></i>
+                            <div>
+                                <h3>3-Path Graceful Degradation</h3>
+                                <p>Primary: browser-controlled execution via OpenClaw. Fallback 1:
+                                    saved-plan local state mutation. Fallback 2: deterministic
+                                    keyword-based ranking if the Stratus API is unavailable.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-chart-bar"></i>
+                            <div>
+                                <h3>46% Faster Recovery</h3>
+                                <p>Evaluated across 4 telehealth scheduling failure scenarios
+                                    against a naive baseline. Stratus-ranked actions with
+                                    simulation pre-screening consistently outperformed manual
+                                    triage heuristics.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section class="section" style="background: rgba(37,99,235,0.03);">
+        <div class="container">
+            <h2 class="section-title">Under The Hood</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3><i class="fas fa-project-diagram"></i> Orchestration</h3>
+                    <p>
+                        The main pipeline runs through 5 phases: await-demo, plan, demo,
+                        fallback, and verify. An incident classifier recognizes failure
+                        patterns, generates shortlisted actions from a library of 15
+                        healthcare scheduling remediation steps, and ranks them via the
+                        Stratus counterfactual reasoning API.
+                    </p>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-tachometer-alt"></i> Metrics Verification</h3>
+                    <p>
+                        A Prometheus client queries live metrics (checkout latency p95, error
+                        rate, retry rate) both before and after action execution. Drift scores
+                        quantify the gap between predicted and actual recovery, surfacing
+                        when a remediation underperformed expectations.
+                    </p>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-desktop"></i> Execution Surfaces</h3>
+                    <p>
+                        Four UI surfaces: an operations board for telehealth scheduling, a
+                        Guardrail Console with incident/decision/execution/verdict views,
+                        an OpenClaw browser automation panel, and a feature flags page for
+                        manual fallback controls.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer">
+        <div class="container">
+            <h2>Let's Build Something Amazing.</h2>
+            <div class="social-links">
+                <a href="mailto:yzhou29@seas.upenn.edu"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/ArtysicistZ" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/yincheng-zhou-99a154353" target="_blank" rel="noopener noreferrer"><i
+                        class="fab fa-linkedin"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 Yincheng Zhou. Built with Vanilla HTML/CSS.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

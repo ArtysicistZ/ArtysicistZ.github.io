@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -51,13 +51,29 @@
             <div class="about-grid">
                 <div class="about-text">
                     <p>
-                        I am a dual-degree student at the <strong>University of Pennsylvania</strong> in the VIPER program, studying <strong>Computer and Information Science (AI concentration) and Physics and Astronomy</strong>. I am passionate about building intelligent systems that work reliably at scale, with deep interests in high-concurrency distributed systems, computer vision, machine learning, and AI agents.
+                        I am a dual-degree student at the <strong>University of Pennsylvania</strong> in the
+                        <strong>VIPER</strong> program, studying <strong>Computer Science (AI concentration)</strong>
+                        and <strong>Physics & Astronomy</strong>. I build intelligent systems across the full
+                        stack — from training vision-language models to engineering production infrastructure that scales.
+                    </p>
+                    <!-- <p>
+                        Right now, I am working on three fronts: at UPenn's <strong>GRASP Laboratory</strong>,
+                        I proposed SPD, a sparse monocular depth estimator achieving 6x inference speedup for
+                        real-time robotics; at Peking University's <strong>HMI Lab</strong>, I built distributed
+                        training infrastructure for GUI agents across 112 Docker VMs and 8 A100 GPUs; and at
+                        <strong>Welta</strong>, I designed Bayesian ad spend optimizers validated across 93
+                        e-commerce brands.
+                    </p> -->
+                    <p>
+                        Right now, I am working on two research fronts: at UPenn's <strong>GRASP Laboratory</strong>,
+                        I proposed SPD, a sparse monocular depth estimator achieving 6x inference speedup for
+                        real-time robotics; and at Peking University's <strong>HMI Lab</strong>, I built distributed
+                        training infrastructure for GUI agents across 112 Docker VMs and 8 A100 GPUs.
                     </p>
                     <p>
-                        What excites me most is the challenge of making multiple AI agents cooperate to solve problems that no single model can handle, and engineering the infrastructure underneath to stay robust under real-world pressure. Currently, I am putting these ideas into practice as the Founding Software Engineer at Franklink, Inc., where I architect multi-agent pipelines for an AI-native professional network, and as a researcher at UPenn GRASP Laboratory, where I work on sparse depth prediction for event cameras under Prof. Pratik Chaudhari.
-                    </p>
-                    <p>
-                        I thrive at the intersection of robust engineering and cutting-edge research, and I am always looking for hard problems that live in that space.
+                        Previously, as the Founding Software Engineer at <strong>Franklink</strong>, I architected
+                        a multi-agent platform from zero to one with Kafka-backed event pipelines sustaining
+                        50+ concurrent sessions on AWS ECS.
                     </p>
                 </div>
                 <div class="about-sidebar">
@@ -67,19 +83,19 @@
                     </div>
                     <div class="sidebar-item">
                         <span class="sidebar-label">Majors</span>
-                        <span class="sidebar-value">CS & Physics</span>
+                        <span class="sidebar-value">CS (AI) & Physics</span>
                     </div>
                     <div class="sidebar-item">
-                        <span class="sidebar-label">Building</span>
-                        <span class="sidebar-value">Franklink, Inc.</span>
+                        <span class="sidebar-label">GPA</span>
+                        <span class="sidebar-value">4.0 / 4.0</span>
                     </div>
                     <div class="sidebar-item">
                         <span class="sidebar-label">Research</span>
-                        <span class="sidebar-value">GRASP Lab</span>
+                        <span class="sidebar-value">GRASP Lab · PKU HMI Lab</span>
                     </div>
                     <div class="sidebar-item">
                         <span class="sidebar-label">Focus</span>
-                        <span class="sidebar-value">AI Agents, CV, ML, Distributed Systems</span>
+                        <span class="sidebar-value">ML, Computer Vision, AI Agents</span>
                     </div>
                 </div>
             </div>
@@ -90,48 +106,74 @@
         <div class="container">
             <h2 class="section-title">Experience</h2>
             <div class="timeline">
-                <!-- Franklink -->
-                <div class="timeline-item">
-                    <div class="timeline-date">Oct 2025 - Present</div>
-                    <div class="timeline-content">
-                        <h3>Founding Software Engineer</h3>
-                        <h4>Franklink, Inc. (Philadelphia, PA)</h4>
-                        <p>Built an iMessage-based networking assistant end-to-end. Designed planner-to-worker
-                            multi-agent routing with retrieval + persisted user state using LangGraph.</p>
-                        <ul class="tech-stack-mini">
-                            <li>LangGraph</li>
-                            <li>AWS ECS</li>
-                            <li>Multi-Agent Systems</li>
-                        </ul>
-                    </div>
-                </div>
                 <!-- GRASP Lab -->
                 <div class="timeline-item">
                     <div class="timeline-date">Jan 2026 - Present</div>
                     <div class="timeline-content">
                         <h3>Machine Learning Researcher</h3>
-                        <h4>GRASP Laboratory, University of Pennsylvania (Philadelphia, PA)</h4>
-                        <p>Developing EventSPD, a sparse depth prediction algorithm for event cameras targeting
-                            2.9x inference speedup over dense baselines for real-time robotics. Advised by Prof. Pratik Chaudhari.</p>
+                        <h4>GRASP Laboratory, University of Pennsylvania</h4>
+                        <p>Proposed SPD, a sparse monocular depth estimator that predicts depth only at queried
+                            pixels, achieving 6x inference speedup over dense methods while preserving accuracy
+                            (AbsRel 0.11 on NYU Depth V2). Developed a dense-train / sparse-infer paradigm with
+                            a 350K-param split decoder and cross-attention fusion on DINOv2 features.
+                            Advised by Prof. Pratik Chaudhari.</p>
                         <ul class="tech-stack-mini">
                             <li>PyTorch</li>
-                            <li>CUDA</li>
+                            <li>DINOv2</li>
                             <li>Computer Vision</li>
                         </ul>
                     </div>
                 </div>
-                <!-- Kaixin -->
+                <!-- Welta (hidden)
                 <div class="timeline-item">
-                    <div class="timeline-date">Dec 2025 - Jan 2026</div>
+                    <div class="timeline-date">Mar 2026 - Present</div>
                     <div class="timeline-content">
-                        <h3>Software Engineering Intern</h3>
-                        <h4>Kaixin Technology Co.,Ltd. (Nanjing, China)</h4>
-                        <p>Engineered an NL2SQL service with SQL-first RAG. Exposed FastAPI endpoints that stream SQL,
-                            reasoning, and chart-ready results into a production fintech terminal.</p>
+                        <h3>Software Engineer Intern</h3>
+                        <h4><a href="https://app.welta.ai" target="_blank" rel="noopener noreferrer" style="color: inherit;">Welta, Inc.</a> — AI-powered ad optimization engine</h4>
+                        <p>Designed ad spend optimizer using Bayesian response curves and convex optimization
+                            to reallocate budget across channels, validated on 93 e-commerce brands with 23%
+                            higher ROAS. Engineered ad simulation engine that tokenizes creatives and models
+                            persona-level reactions via LLM with 55% better prediction accuracy.</p>
                         <ul class="tech-stack-mini">
-                            <li>NL2SQL</li>
-                            <li>RAG</li>
                             <li>FastAPI</li>
+                            <li>Bayesian Optimization</li>
+                            <li>LLM</li>
+                        </ul>
+                    </div>
+                </div>
+                -->
+                <!-- PKU HMI Lab -->
+                <div class="timeline-item">
+                    <div class="timeline-date">Mar 2026 - Present</div>
+                    <div class="timeline-content">
+                        <h3>Machine Learning Researcher</h3>
+                        <h4>Human Machine Intelligence Laboratory, Peking University</h4>
+                        <p>Developed MCTS-guided SFT for GUI agent training with step-level decisions and
+                            difficulty weighting, outperforming trajectory-level RL (GRPO) at 25% compute and
+                            raising UI-TARS-7B's OSWorld success from 12.3% to 17.7%. Engineered distributed
+                            rollout infrastructure across 112 Docker VMs and 8 A100 GPUs.</p>
+                        <ul class="tech-stack-mini">
+                            <li>PyTorch</li>
+                            <li>vLLM</li>
+                            <li>Docker</li>
+                            <li>Ray</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Franklink -->
+                <div class="timeline-item">
+                    <div class="timeline-date">Oct 2025 - Feb 2026</div>
+                    <div class="timeline-content">
+                        <h3>Founding Software Engineer</h3>
+                        <h4><a href="projects/franklink.html" style="color: inherit;">Franklink, Inc.</a> — AI-native networking platform</h4>
+                        <p>Designed iMessage-based multi-agent orchestration with persisted memory, selective
+                            dispatch across 5 sub-agents, and agentic RAG over 8 permissioned tools. Engineered
+                            a Kafka-backed event pipeline with idempotency keys and retry + DLQ, sustaining
+                            50+ concurrent sessions on AWS ECS.</p>
+                        <ul class="tech-stack-mini">
+                            <li>Kafka</li>
+                            <li>AWS ECS</li>
+                            <li>Multi-Agent Systems</li>
                         </ul>
                     </div>
                 </div>
@@ -144,68 +186,133 @@
             <h2 class="section-title">Featured Projects</h2>
             <div class="project-grid">
 
+                <!-- Franklink -->
+                <a href="projects/franklink.html" class="project-card-link">
+                    <article class="project-card">
+                        <div class="project-content">
+                            <h3>Franklink</h3>
+                            <p class="project-desc">iMessage-based multi-agent orchestration with selective dispatch
+                                across 5 sub-agents and agentic RAG over 8 permissioned tools, backed by a Kafka
+                                event pipeline sustaining 50+ concurrent sessions on AWS ECS.</p>
+                            <div class="project-tags">
+                                <span>Kafka</span>
+                                <span>AWS ECS</span>
+                                <span>Multi-Agent</span>
+                                <span>Agentic RAG</span>
+                            </div>
+                            <div class="project-links">
+                                <span class="link-btn">View Details <i
+                                        class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </article>
+                </a>
+
                 <!-- AlphaOne -->
                 <a href="projects/alphaone.html" class="project-card-link">
                     <article class="project-card">
                         <div class="project-content">
                             <h3>AlphaOne</h3>
-                            <p class="project-desc">Full-stack sentiment platform powered by DeBERTa-ABSA-v2, a model
-                                we trained to 82.5% accuracy on per-stock classification from Reddit.</p>
+                            <p class="project-desc">Per-ticker financial sentiment platform powered by a DeBERTa model
+                                fine-tuned to 82.5% accuracy, with a 3-pass NLP pipeline ingesting from 7 subreddits
+                                through concurrent-safe batch processing.</p>
                             <div class="project-tags">
-                                <span>React</span>
-                                <span>Node.js</span>
-                                <span>Spring Boot</span>
-                                <span>Fine Tuning</span>
-                                <span>BERT</span>
+                                <span>DeBERTa</span>
                                 <span>LoRA</span>
+                                <span>Spring Boot</span>
+                                <span>React</span>
                                 <span>Docker</span>
                             </div>
                             <div class="project-links">
-                                <span class="link-btn">View Detailed Information <i
+                                <span class="link-btn">View Details <i
                                         class="fas fa-arrow-right"></i></span>
                             </div>
                         </div>
                     </article>
                 </a>
 
-                <!-- Franklink-iMessage -->
-                <a href="projects/franklink.html" class="project-card-link">
+                <!-- Heard -->
+                <a href="projects/heard.html" class="project-card-link">
                     <article class="project-card">
                         <div class="project-content">
-                            <h3>Franklink</h3>
-                            <p class="project-desc">Architected the multi-agent brain behind the first AI-native
-                                professional network. Designed async messaging pipeline with high scalability. </p>
+                            <h3>Heard</h3>
+                            <p class="project-desc">Hackathon-winning civic platform that converts citizen grievances
+                                into ready-to-send advocacy with root-cause analysis and elected-official mapping
+                                across 4 government levels.</p>
                             <div class="project-tags">
-                                <span>Python</span>
-                                <span>ReAct</span>
+                                <span>Next.js</span>
+                                <span>FastAPI</span>
                                 <span>LangGraph</span>
-                                <span>Kafka</span>
-                                <span>AWS ECS</span>
+                                <span>PostgreSQL</span>
                             </div>
                             <div class="project-links">
-                                <span class="link-btn">View Detailed Information <i
+                                <span class="link-btn">View Details <i
                                         class="fas fa-arrow-right"></i></span>
                             </div>
                         </div>
                     </article>
                 </a>
 
-                <!-- ADK NL2SQL -->
+                <!-- F-Zero Racing Agent -->
+                <a href="projects/fzero.html" class="project-card-link">
+                    <article class="project-card">
+                        <div class="project-content">
+                            <h3>F-Zero Racing Agent</h3>
+                            <p class="project-desc">PPO agent trained across 80 parallel SNES emulators with
+                                spline-interpolated reward shaping, reaching competitive performance on a task
+                                previously unsolvable due to sparse 3,000+ step horizons.</p>
+                            <div class="project-tags">
+                                <span>PPO</span>
+                                <span>PyTorch</span>
+                                <span>Stable-Baselines3</span>
+                                <span>Reward Shaping</span>
+                            </div>
+                            <div class="project-links">
+                                <span class="link-btn">View Details <i
+                                        class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </article>
+                </a>
+
+                <!-- IncidentGuard -->
+                <a href="projects/incidentguard.html" class="project-card-link">
+                    <article class="project-card">
+                        <div class="project-content">
+                            <h3>IncidentGuard</h3>
+                            <p class="project-desc">Multi-agent incident remediation system that simulates outcomes
+                                before execution to reject unsafe plans, achieving 46% faster recovery with a
+                                closed-loop plan-execute-verify pipeline.</p>
+                            <div class="project-tags">
+                                <span>Multi-Agent</span>
+                                <span>Prometheus</span>
+                                <span>SimPy</span>
+                                <span>FastAPI</span>
+                            </div>
+                            <div class="project-links">
+                                <span class="link-btn">View Details <i
+                                        class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </article>
+                </a>
+
+                <!-- NL2SQL Bot -->
                 <a href="projects/nl2sql.html" class="project-card-link">
                     <article class="project-card">
                         <div class="project-content">
                             <h3>NL2SQL Bot</h3>
-                            <p class="project-desc">SQL-first RAG chatbot with controlled execution. Safely executes
-                                SQL queries based on user intent. Smart visualization of results.</p>
+                            <p class="project-desc">5-agent orchestration on Google ADK converting natural language
+                                to validated SQL with loop-guarded retry, 18 security patterns, and automated
+                                6-type chart generation across 3 SQL dialects.</p>
                             <div class="project-tags">
-                                <span>Python</span>
                                 <span>Google ADK</span>
-                                <span>RAG</span>
                                 <span>SQL</span>
                                 <span>FastAPI</span>
+                                <span>Plotly</span>
                             </div>
                             <div class="project-links">
-                                <span class="link-btn">View Detailed Information <i
+                                <span class="link-btn">View Details <i
                                         class="fas fa-arrow-right"></i></span>
                             </div>
                         </div>
@@ -233,29 +340,30 @@
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>ML & Frameworks</h3>
+                    <h3>ML & Data</h3>
                     <div class="skill-list">
                         <span>PyTorch</span>
-                        <span>Hugging Face</span>
                         <span>CUDA</span>
-                        <span>LangGraph</span>
-                        <span>Google ADK</span>
+                        <span>vLLM</span>
+                        <span>HuggingFace Transformers</span>
                         <span>spaCy</span>
-                        <span>FastAPI</span>
-                        <span>Spring Boot</span>
-                        <span>React</span>
-                        <span>Node.js</span>
+                        <span>Pandas</span>
+                        <span>LangGraph</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>Infrastructure</h3>
+                    <h3>Backend & Infrastructure</h3>
                     <div class="skill-list">
+                        <span>FastAPI</span>
+                        <span>Spring Boot</span>
                         <span>Kafka</span>
                         <span>Redis</span>
-                        <span>PostgreSQL</span>
-                        <span>AWS</span>
+                        <span>Celery</span>
                         <span>Docker</span>
+                        <span>AWS</span>
+                        <span>Ray</span>
                         <span>Linux</span>
+                        <span>Git</span>
                     </div>
                 </div>
             </div>
@@ -267,9 +375,9 @@
             <h2>Let's Build Something Amazing.</h2>
             <div class="social-links">
                 <a href="mailto:yzhou29@seas.upenn.edu" title="Email"><i class="fas fa-envelope"></i></a>
-                <a href="https://github.com/ArtysicistZ" target="_blank" title="GitHub"><i
+                <a href="https://github.com/ArtysicistZ" target="_blank" rel="noopener noreferrer" title="GitHub"><i
                         class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/yincheng-zhou-99a154353" target="_blank" title="LinkedIn"><i
+                <a href="https://www.linkedin.com/in/yincheng-zhou-99a154353" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i
                         class="fab fa-linkedin"></i></a>
             </div>
             <p class="copyright">&copy; 2026 Yincheng Zhou. Built with Vanilla HTML/CSS.</p>

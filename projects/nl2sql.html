@@ -32,19 +32,21 @@
     <header class="hero" style="min-height: 60vh; padding-top: 12rem;">
         <div class="container">
             <div class="project-header-content">
-                <span class="project-badge">Personal Project</span>
+                <span class="project-badge">Agentic NL-to-SQL Orchestration</span>
                 <h1 class="headline" style="font-size: 3.5rem;">NL2SQL Bot</h1>
                 <p class="project-tagline">
-                    Multi-agent system that converts natural language to validated SQL
-                    with safe execution and interactive visualization.
+                    5-agent orchestration on Google ADK converting natural language to validated SQL
+                    with loop-guarded retry, per-agent model routing, and automated 6-type chart
+                    generation across 3 SQL dialects.
                 </p>
                 <div class="project-tags huge-tags">
-                    <span>Multi-Agent Orchestration</span>
-                    <span>SQL-First RAG</span>
-                    <span>Security-Hardened</span>
+                    <span>Google ADK</span>
+                    <span>5-Agent Pipeline</span>
+                    <span>18 SQL Security Patterns</span>
+                    <span>3 SQL Dialects</span>
                 </div>
                 <div class="cta-group">
-                    <a href="https://github.com/ArtysicistZ/NL2SQL_Bot.git" target="_blank" class="btn-primary"><i
+                    <a href="https://github.com/ArtysicistZ/NL2SQL_Bot.git" target="_blank" rel="noopener noreferrer" class="btn-primary"><i
                             class="fab fa-github"></i> View on GitHub</a>
                     <a href="../index.html#projects" class="btn-secondary"><i class="fas fa-arrow-left"></i> Back to
                         Portfolio</a>
@@ -63,19 +65,20 @@
                     <p>
                         Business users need answers from databases but can't write SQL. Existing chatbots either
                         generate unsafe queries or produce results that are hard to interpret. NL2SQL Bot bridges
-                        this gap with a <strong>multi-agent pipeline</strong> that understands intent, generates
-                        validated SQL, and renders interactive visualizations — all in one conversation.
+                        this gap with a <strong>5-agent pipeline</strong> that understands intent, generates
+                        validated SQL, and renders interactive visualizations &mdash; all in one conversation.
                     </p>
                     <p>
-                        Built during my internship at Kaixin Technology, this system was designed for
-                        <strong>production fintech terminals</strong> where correctness and security are non-negotiable.
-                        Every query passes through 18 SQL security checks before execution, with table allowlisting
-                        and dialect-aware validation across MySQL, PostgreSQL, and SQLite.
+                        Security is non-negotiable: every query passes through <strong>18 blocked SQL patterns</strong>
+                        (DELETE, DROP, INSERT, UPDATE, TRUNCATE, ALTER, etc.) before execution, with table allowlisting
+                        and dialect-aware validation ensuring <strong>cross-dialect portability across MySQL,
+                        PostgreSQL, and SQLite</strong>.
                     </p>
                     <p>
                         The system uses <strong>Google ADK</strong> (Agent Development Kit) to orchestrate 5 specialized
-                        agents with session state passing, loop-guarded retry mechanisms, and per-agent LLM overrides
-                        for optimal cost-performance tuning.
+                        agents with session state passing, <strong>loop-guarded retry</strong> (max 4 SQL regeneration
+                        attempts per query), and <strong>per-agent model routing</strong> via environment variable
+                        overrides for optimal cost-performance tuning.
                     </p>
                 </div>
 
@@ -86,9 +89,9 @@
                             <i class="fas fa-robot"></i>
                             <div>
                                 <h3>5-Agent Orchestration</h3>
-                                <p>Intent classifier, SQL generator, SQL validator, execution engine, and
-                                    visualization agent — each with dedicated LLM overrides and session state
-                                    passing for optimal performance.</p>
+                                <p>Root orchestrator, SQL task agent, SQL generator, plot config agent, and
+                                    result interpreter &mdash; each with per-agent model routing via environment
+                                    variable overrides for cost-performance tuning.</p>
                             </div>
                         </li>
                         <li>
@@ -103,9 +106,10 @@
                         <li>
                             <i class="fas fa-chart-bar"></i>
                             <div>
-                                <h3>Smart Visualization</h3>
-                                <p>Results are automatically rendered as interactive Plotly.js charts — bar graphs,
-                                    line charts, or tables — chosen based on the query structure and data shape.</p>
+                                <h3>6-Type Chart Generation</h3>
+                                <p>Results rendered as interactive Plotly.js visualizations: table, column,
+                                    horizontal bar, line, pie, or none &mdash; selected automatically by the
+                                    plot config agent based on query structure and data shape.</p>
                             </div>
                         </li>
                         <li>
@@ -172,8 +176,8 @@
             <h2>Let's Build Something Amazing.</h2>
             <div class="social-links">
                 <a href="mailto:yzhou29@seas.upenn.edu"><i class="fas fa-envelope"></i></a>
-                <a href="https://github.com/ArtysicistZ" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/yincheng-zhou-99a154353" target="_blank"><i
+                <a href="https://github.com/ArtysicistZ" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/yincheng-zhou-99a154353" target="_blank" rel="noopener noreferrer"><i
                         class="fab fa-linkedin"></i></a>
             </div>
             <p class="copyright">&copy; 2026 Yincheng Zhou. Built with Vanilla HTML/CSS.</p>

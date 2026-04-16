@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heard - Yincheng Zhou</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="../index.html" class="logo">Yincheng</a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#projects">Projects</a></li>
+            <li><a href="#contact" class="btn-primary">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <header class="hero" style="min-height: 60vh; padding-top: 12rem;">
+        <div class="container">
+            <div class="project-header-content">
+                <span class="project-badge">Anthropic x Penn Hackathon &mdash; Champion Track, 3rd Overall</span>
+                <h1 class="headline" style="font-size: 3.5rem;">Heard</h1>
+                <p class="project-tagline">
+                    A democratic advocacy platform that converts citizen grievances into
+                    ready-to-send policy briefs, maps elected officials across 4 government
+                    levels, and pairs one-click citizen outreach with a district-aware
+                    official dashboard.
+                </p>
+                <div class="project-tags huge-tags">
+                    <span>Civic Tech</span>
+                    <span>Multi-Agent</span>
+                    <span>Full-Stack</span>
+                    <span>Geospatial</span>
+                </div>
+                <div class="cta-group">
+                    <a href="https://github.com/StevenWang-CY/Heard" target="_blank" rel="noopener noreferrer" class="btn-primary"><i
+                            class="fab fa-github"></i> GitHub</a>
+                    <a href="https://drive.google.com/file/d/1CfE05iKRByR8cksqBRl8Ob9zDtzqdjfM/view?usp=sharing"
+                        target="_blank" rel="noopener noreferrer" class="btn-secondary"><i class="fas fa-play-circle"></i> Demo Video</a>
+                    <a href="../index.html#projects" class="btn-secondary"><i class="fas fa-arrow-left"></i> Back to
+                        Portfolio</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Overview Section -->
+    <section class="section">
+        <div class="container">
+            <div class="project-details-grid">
+
+                <div class="project-info">
+                    <h2 class="section-title">The Problem</h2>
+                    <p>
+                        Citizens have complaints about local infrastructure, public safety, and policy
+                        failures, but turning frustration into effective advocacy is hard. Most people
+                        don't know which official to contact, what jurisdiction the issue falls under,
+                        or how to frame a complaint that gets attention.
+                    </p>
+                    <p>
+                        Heard closes this gap with a <strong>two-sided platform</strong>: citizens
+                        describe a problem in plain language and receive a complete advocacy toolkit
+                        &mdash; policy brief, root-cause analysis, affected population estimate, and a
+                        ready-to-send letter addressed to the right official. On the other side,
+                        elected officials see a <strong>district-aware dashboard</strong> that
+                        aggregates constituent grievances, tracks trending issues, and surfaces
+                        directed actions by jurisdiction.
+                    </p>
+                    <p>
+                        The platform maps officials across <strong>municipal, county, state, and
+                        federal</strong> levels using the Cicero API, with privacy-preserving
+                        geolocation that drifts display coordinates by ~200m while storing exact
+                        locations privately.
+                    </p>
+                </div>
+
+                <div class="project-highlights">
+                    <h2 class="section-title">Technical Highlights</h2>
+                    <ul class="feature-list">
+                        <li>
+                            <i class="fas fa-landmark"></i>
+                            <div>
+                                <h3>4-Level Official Mapping</h3>
+                                <p>Automatic district assignment via Cicero API spanning municipal,
+                                    county, state (house + senate), and federal levels, including
+                                    at-large seat handling.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-robot"></i>
+                            <div>
+                                <h3>AI-Powered Advocacy Pipeline</h3>
+                                <p>A civic intelligence skill generates policy briefs, root-cause
+                                    analysis, intervention recommendations, and professional letters
+                                    from unstructured citizen complaints.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-columns"></i>
+                            <div>
+                                <h3>Two-Sided Platform</h3>
+                                <p>Citizens get one-click outreach; officials get a dashboard
+                                    filtered by their exact jurisdiction showing grievances, trending
+                                    issues, and directed actions with engagement stats.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <h3>Community Engagement</h3>
+                                <p>Public grievance feed with full-text search, follow tracking,
+                                    and trending issue aggregation. Privacy-preserving display
+                                    locations on an interactive map.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section class="section" style="background: rgba(37,99,235,0.03);">
+        <div class="container">
+            <h2 class="section-title">Under The Hood</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3><i class="fas fa-project-diagram"></i> Agent Orchestration</h3>
+                    <p>
+                        Built on DeerFlow 2.0 (ByteDance) with a LangGraph server for multi-agent
+                        orchestration. The civic intelligence skill handles the full pipeline from
+                        complaint parsing to letter generation, with sandboxed execution and
+                        MCP integration for extensibility.
+                    </p>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-map-marked-alt"></i> Geospatial Backend</h3>
+                    <p>
+                        PostgreSQL with full-text search and geospatial indexing. District-level
+                        indexes enable fast filtering for the official dashboard. The Cicero
+                        service caches official lookups for 24 hours and extracts district
+                        assignments across 8 jurisdiction types.
+                    </p>
+                </div>
+                <div class="tech-card">
+                    <h3><i class="fas fa-desktop"></i> Frontend</h3>
+                    <p>
+                        Next.js 16 with React 19 serving a chat interface for grievance input
+                        (voice and text), a community feed with map visualization via MapLibre,
+                        and a candidate dashboard with district-aware filtering.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer">
+        <div class="container">
+            <h2>Let's Build Something Amazing.</h2>
+            <div class="social-links">
+                <a href="mailto:yzhou29@seas.upenn.edu"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/ArtysicistZ" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/yincheng-zhou-99a154353" target="_blank" rel="noopener noreferrer"><i
+                        class="fab fa-linkedin"></i></a>
+            </div>
+            <p class="copyright">&copy; 2026 Yincheng Zhou. Built with Vanilla HTML/CSS.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
