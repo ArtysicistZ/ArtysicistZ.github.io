@@ -1,390 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yincheng Zhou</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Personal site of Yincheng Zhou — computer science and physics at Penn.">
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
-
 <body>
+    <main>
 
-    <nav class="navbar">
-        <div class="logo">Yincheng</div>
-        <ul class="nav-links">
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact" class="btn-primary">Contact</a></li>
-        </ul>
-        <div class="hamburger">
-            <i class="fas fa-bars"></i>
-        </div>
-    </nav>
+        <header class="site-header">
+            <h1>Yincheng Zhou</h1>
+            <p class="subtitle">Computer Science &amp; Physics at the University of Pennsylvania.</p>
+        </header>
 
-    <header class="hero hero-centered" style="padding-top: 9rem;">
-        <div class="container">
-            <div class="hero-portrait-centered">
-                <img src="assets/images/profile.jpg" alt="Yincheng Zhou">
-            </div>
-            <p class="greeting">Hi, I'm Yincheng Zhou</p>
-            <p class="hero-tagline">CS & Physics @ UPenn VIPER</p>
-            <p class="bio-snippet" style="text-align: center; margin-left: auto; margin-right: auto;">
-                Building intelligent systems that work reliably at scale.
+        <section class="bio">
+            <p><span class="dropcap">I</span> came to programming through physics olympiads in China &mdash; the kind where you have five hours, a blank page, and a magnet falling through a copper tube. You don't get there by reaching for an equation. You get there by sitting with the system long enough to see what it wants to do: what's conserved, what's resisting, where the energy goes. The math comes after the picture, not before it.</p>
+
+            <p>That kind of intuition turns out to be most of what I've come to value about software. The systems I find interesting reward the same habit &mdash; depth estimators running at the edge of GPU throughput, training pipelines that scale by factors instead of percentages, hot paths measured in microseconds. The questions trade places: where does the time go, where does the signal live, which assumption is quietly doing most of the work. The move underneath is the same: build the right model in your head before you write the wrong code.</p>
+
+            <p>These days that means sparse depth estimation at the <abbr title="General Robotics, Automation, Sensing, and Perception">GRASP</abbr> Lab and GUI agent training at Peking University's HMI Lab.</p>
+        </section>
+
+        <hr class="ornament" aria-hidden="true">
+
+        <section>
+            <h2>now</h2>
+            <p class="meta"><em>June&nbsp;2026.</em></p>
+            <p>Wrapping our research on long-horizon GUI agent training. Trying to figure out why one of my Triton kernels runs faster on an A100 than on an RTX 2080 Ti &mdash; I have a theory involving L2 eviction, but I haven't proved it yet. Cooking authentic food everyday.</p>
+        </section>
+
+        <hr class="ornament" aria-hidden="true">
+
+        <section>
+            <h2>writing</h2>
+            <ul class="entries">
+                <li>
+                    <span class="date">2026·06</span>
+                    <a href="writing/vision-vs-llm-kv-cache.html">Why KV cache reuse is harder for vision than for language</a>
+                </li>
+                <li>
+                    <span class="date">2026·06</span>
+                    <a href="writing/knowing-what-changed.html">On knowing what changed in a vision pipeline</a>
+                </li>
+                <li>
+                    <span class="date">2026·06</span>
+                    <a href="writing/olympiad-physics.html">On Olympiad physics and engineering intuition</a>
+                </li>
+            </ul>
+        </section>
+
+        <hr class="ornament" aria-hidden="true">
+
+        <section>
+            <h2>readings</h2>
+            <p class="meta">Things I keep coming back to.</p>
+            <ul class="bare">
+                <li>&ldquo;Attention Is All You Need&rdquo; &mdash; Vaswani et al., 2017</li>
+                <li>&ldquo;DINOv2: Learning Robust Visual Features without Supervision&rdquo; &mdash; Oquab et al., 2023</li>
+                <li>&ldquo;MiDaS: Towards Robust Monocular Depth Estimation&rdquo; &mdash; Ranftl et al., 2020</li>
+                <li>&ldquo;Eventful Transformers&rdquo; &mdash; Dutson et al., ICCV&nbsp;2023</li>
+                <li>&ldquo;Token Merging: Your ViT But Faster&rdquo; &mdash; Bolya et al., ICLR&nbsp;2023</li>
+                <li>&ldquo;VideoMAE&rdquo; &mdash; Tong et al., NeurIPS&nbsp;2022</li>
+                <li>&ldquo;Marigold: Repurposing Diffusion-Based Image Generators for Monocular Depth&rdquo; &mdash; Ke et al., CVPR&nbsp;2024</li>
+                <li>&ldquo;Mamba: Linear-Time Sequence Modeling with Selective State Spaces&rdquo; &mdash; Gu &amp; Dao, 2023</li>
+            </ul>
+        </section>
+
+        <hr class="ornament" aria-hidden="true">
+
+        <section>
+            <h2>elsewhere</h2>
+            <p>
+                <a href="mailto:artysicistz@gmail.com">email</a>
+                <span class="dot" aria-hidden="true">·</span>
+                <a href="https://github.com/ArtysicistZ">github</a>
             </p>
-            <div class="cta-group" style="justify-content: center;">
-                <a href="#about" class="btn-secondary">About Me</a>
-                <a href="#projects" class="btn-secondary">View My Work</a>
-            </div>
-        </div>
-    </header>
+        </section>
 
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-grid">
-                <div class="about-text">
-                    <p>
-                        I am a dual-degree student at the <strong>University of Pennsylvania</strong> in the
-                        <strong>VIPER</strong> program, studying <strong>Computer Science (AI concentration)</strong>
-                        and <strong>Physics & Astronomy</strong>. I build intelligent systems across the full
-                        stack — from training vision-language models to engineering production infrastructure that scales.
-                    </p>
-                    <!-- <p>
-                        Right now, I am working on three fronts: at UPenn's <strong>GRASP Laboratory</strong>,
-                        I proposed SPD, a sparse monocular depth estimator achieving 6x inference speedup for
-                        real-time robotics; at Peking University's <strong>HMI Lab</strong>, I built distributed
-                        training infrastructure for GUI agents across 112 Docker VMs and 8 A100 GPUs; and at
-                        <strong>Welta</strong>, I designed Bayesian ad spend optimizers validated across 93
-                        e-commerce brands.
-                    </p> -->
-                    <p>
-                        Right now, I am working on two research fronts: at UPenn's <strong>GRASP Laboratory</strong>,
-                        I proposed SPD, a sparse monocular depth estimator achieving 6x inference speedup for
-                        real-time robotics; and at Peking University's <strong>HMI Lab</strong>, I built distributed
-                        training infrastructure for GUI agents across 112 Docker VMs and 8 A100 GPUs.
-                    </p>
-                    <p>
-                        Previously, as the Founding Software Engineer at <strong>Franklink</strong>, I architected
-                        a multi-agent platform from zero to one with Kafka-backed event pipelines sustaining
-                        50+ concurrent sessions on AWS ECS.
-                    </p>
-                </div>
-                <div class="about-sidebar">
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Education</span>
-                        <span class="sidebar-value">UPenn VIPER</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Majors</span>
-                        <span class="sidebar-value">CS (AI) & Physics</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">GPA</span>
-                        <span class="sidebar-value">4.0 / 4.0</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Research</span>
-                        <span class="sidebar-value">GRASP Lab · PKU HMI Lab</span>
-                    </div>
-                    <div class="sidebar-item">
-                        <span class="sidebar-label">Focus</span>
-                        <span class="sidebar-value">ML, Computer Vision, AI Agents</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <footer class="colophon">
+            <p>Typeset in Source Serif&nbsp;4. Plain HTML and CSS, no JavaScript. Last updated June&nbsp;2026.</p>
+        </footer>
 
-    <section id="experience" class="section">
-        <div class="container">
-            <h2 class="section-title">Experience</h2>
-            <div class="timeline">
-                <!-- GRASP Lab -->
-                <div class="timeline-item">
-                    <div class="timeline-date">Jan 2026 - Present</div>
-                    <div class="timeline-content">
-                        <h3>Machine Learning Researcher</h3>
-                        <h4>GRASP Laboratory, University of Pennsylvania</h4>
-                        <p>Proposed SPD, a sparse monocular depth estimator that predicts depth only at queried
-                            pixels, achieving 6x inference speedup over dense methods while preserving accuracy
-                            (AbsRel 0.11 on NYU Depth V2). Developed a dense-train / sparse-infer paradigm with
-                            a 350K-param split decoder and cross-attention fusion on DINOv2 features.
-                            Advised by Prof. Pratik Chaudhari.</p>
-                        <ul class="tech-stack-mini">
-                            <li>PyTorch</li>
-                            <li>DINOv2</li>
-                            <li>Computer Vision</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Welta (hidden)
-                <div class="timeline-item">
-                    <div class="timeline-date">Mar 2026 - Present</div>
-                    <div class="timeline-content">
-                        <h3>Software Engineer Intern</h3>
-                        <h4><a href="https://app.welta.ai" target="_blank" rel="noopener noreferrer" style="color: inherit;">Welta, Inc.</a> — AI-powered ad optimization engine</h4>
-                        <p>Designed ad spend optimizer using Bayesian response curves and convex optimization
-                            to reallocate budget across channels, validated on 93 e-commerce brands with 23%
-                            higher ROAS. Engineered ad simulation engine that tokenizes creatives and models
-                            persona-level reactions via LLM with 55% better prediction accuracy.</p>
-                        <ul class="tech-stack-mini">
-                            <li>FastAPI</li>
-                            <li>Bayesian Optimization</li>
-                            <li>LLM</li>
-                        </ul>
-                    </div>
-                </div>
-                -->
-                <!-- PKU HMI Lab -->
-                <div class="timeline-item">
-                    <div class="timeline-date">Mar 2026 - Present</div>
-                    <div class="timeline-content">
-                        <h3>Machine Learning Researcher</h3>
-                        <h4>Human Machine Intelligence Laboratory, Peking University</h4>
-                        <p>Developed MCTS-guided SFT for GUI agent training with step-level decisions and
-                            difficulty weighting, outperforming trajectory-level RL (GRPO) at 25% compute and
-                            raising UI-TARS-7B's OSWorld success from 12.3% to 17.7%. Engineered distributed
-                            rollout infrastructure across 112 Docker VMs and 8 A100 GPUs.</p>
-                        <ul class="tech-stack-mini">
-                            <li>PyTorch</li>
-                            <li>vLLM</li>
-                            <li>Docker</li>
-                            <li>Ray</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Franklink -->
-                <div class="timeline-item">
-                    <div class="timeline-date">Oct 2025 - Feb 2026</div>
-                    <div class="timeline-content">
-                        <h3>Founding Software Engineer</h3>
-                        <h4><a href="projects/franklink.html" style="color: inherit;">Franklink, Inc.</a> — AI-native networking platform</h4>
-                        <p>Designed iMessage-based multi-agent orchestration with persisted memory, selective
-                            dispatch across 5 sub-agents, and agentic RAG over 8 permissioned tools. Engineered
-                            a Kafka-backed event pipeline with idempotency keys and retry + DLQ, sustaining
-                            50+ concurrent sessions on AWS ECS.</p>
-                        <ul class="tech-stack-mini">
-                            <li>Kafka</li>
-                            <li>AWS ECS</li>
-                            <li>Multi-Agent Systems</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="section">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="project-grid">
-
-                <!-- Franklink -->
-                <a href="projects/franklink.html" class="project-card-link">
-                    <article class="project-card">
-                        <div class="project-content">
-                            <h3>Franklink</h3>
-                            <p class="project-desc">iMessage-based multi-agent orchestration with selective dispatch
-                                across 5 sub-agents and agentic RAG over 8 permissioned tools, backed by a Kafka
-                                event pipeline sustaining 50+ concurrent sessions on AWS ECS.</p>
-                            <div class="project-tags">
-                                <span>Kafka</span>
-                                <span>AWS ECS</span>
-                                <span>Multi-Agent</span>
-                                <span>Agentic RAG</span>
-                            </div>
-                            <div class="project-links">
-                                <span class="link-btn">View Details <i
-                                        class="fas fa-arrow-right"></i></span>
-                            </div>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- AlphaOne -->
-                <a href="projects/alphaone.html" class="project-card-link">
-                    <article class="project-card">
-                        <div class="project-content">
-                            <h3>AlphaOne</h3>
-                            <p class="project-desc">Per-ticker financial sentiment platform powered by a DeBERTa model
-                                fine-tuned to 82.5% accuracy, with a 3-pass NLP pipeline ingesting from 7 subreddits
-                                through concurrent-safe batch processing.</p>
-                            <div class="project-tags">
-                                <span>DeBERTa</span>
-                                <span>LoRA</span>
-                                <span>Spring Boot</span>
-                                <span>React</span>
-                                <span>Docker</span>
-                            </div>
-                            <div class="project-links">
-                                <span class="link-btn">View Details <i
-                                        class="fas fa-arrow-right"></i></span>
-                            </div>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- Heard -->
-                <a href="projects/heard.html" class="project-card-link">
-                    <article class="project-card">
-                        <div class="project-content">
-                            <h3>Heard</h3>
-                            <p class="project-desc">Hackathon-winning civic platform that converts citizen grievances
-                                into ready-to-send advocacy with root-cause analysis and elected-official mapping
-                                across 4 government levels.</p>
-                            <div class="project-tags">
-                                <span>Next.js</span>
-                                <span>FastAPI</span>
-                                <span>LangGraph</span>
-                                <span>PostgreSQL</span>
-                            </div>
-                            <div class="project-links">
-                                <span class="link-btn">View Details <i
-                                        class="fas fa-arrow-right"></i></span>
-                            </div>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- F-Zero Racing Agent -->
-                <a href="projects/fzero.html" class="project-card-link">
-                    <article class="project-card">
-                        <div class="project-content">
-                            <h3>F-Zero Racing Agent</h3>
-                            <p class="project-desc">PPO agent trained across 80 parallel SNES emulators with
-                                spline-interpolated reward shaping, reaching competitive performance on a task
-                                previously unsolvable due to sparse 3,000+ step horizons.</p>
-                            <div class="project-tags">
-                                <span>PPO</span>
-                                <span>PyTorch</span>
-                                <span>Stable-Baselines3</span>
-                                <span>Reward Shaping</span>
-                            </div>
-                            <div class="project-links">
-                                <span class="link-btn">View Details <i
-                                        class="fas fa-arrow-right"></i></span>
-                            </div>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- IncidentGuard -->
-                <a href="projects/incidentguard.html" class="project-card-link">
-                    <article class="project-card">
-                        <div class="project-content">
-                            <h3>IncidentGuard</h3>
-                            <p class="project-desc">Multi-agent incident remediation system that simulates outcomes
-                                before execution to reject unsafe plans, achieving 46% faster recovery with a
-                                closed-loop plan-execute-verify pipeline.</p>
-                            <div class="project-tags">
-                                <span>Multi-Agent</span>
-                                <span>Prometheus</span>
-                                <span>SimPy</span>
-                                <span>FastAPI</span>
-                            </div>
-                            <div class="project-links">
-                                <span class="link-btn">View Details <i
-                                        class="fas fa-arrow-right"></i></span>
-                            </div>
-                        </div>
-                    </article>
-                </a>
-
-                <!-- NL2SQL Bot -->
-                <a href="projects/nl2sql.html" class="project-card-link">
-                    <article class="project-card">
-                        <div class="project-content">
-                            <h3>NL2SQL Bot</h3>
-                            <p class="project-desc">5-agent orchestration on Google ADK converting natural language
-                                to validated SQL with loop-guarded retry, 18 security patterns, and automated
-                                6-type chart generation across 3 SQL dialects.</p>
-                            <div class="project-tags">
-                                <span>Google ADK</span>
-                                <span>SQL</span>
-                                <span>FastAPI</span>
-                                <span>Plotly</span>
-                            </div>
-                            <div class="project-links">
-                                <span class="link-btn">View Details <i
-                                        class="fas fa-arrow-right"></i></span>
-                            </div>
-                        </div>
-                    </article>
-                </a>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="section">
-        <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-wrapper">
-                <div class="skill-category">
-                    <h3>Languages</h3>
-                    <div class="skill-list">
-                        <span>C++</span>
-                        <span>Python</span>
-                        <span>Java</span>
-                        <span>JavaScript/TypeScript</span>
-                        <span>SQL</span>
-                        <span>Assembly</span>
-                        <span>OCaml</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>ML & Data</h3>
-                    <div class="skill-list">
-                        <span>PyTorch</span>
-                        <span>CUDA</span>
-                        <span>vLLM</span>
-                        <span>HuggingFace Transformers</span>
-                        <span>spaCy</span>
-                        <span>Pandas</span>
-                        <span>LangGraph</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Backend & Infrastructure</h3>
-                    <div class="skill-list">
-                        <span>FastAPI</span>
-                        <span>Spring Boot</span>
-                        <span>Kafka</span>
-                        <span>Redis</span>
-                        <span>Celery</span>
-                        <span>Docker</span>
-                        <span>AWS</span>
-                        <span>Ray</span>
-                        <span>Linux</span>
-                        <span>Git</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contact" class="footer">
-        <div class="container">
-            <h2>Let's Build Something Amazing.</h2>
-            <div class="social-links">
-                <a href="mailto:yzhou29@seas.upenn.edu" title="Email"><i class="fas fa-envelope"></i></a>
-                <a href="https://github.com/ArtysicistZ" target="_blank" rel="noopener noreferrer" title="GitHub"><i
-                        class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/yincheng-zhou-99a154353" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i
-                        class="fab fa-linkedin"></i></a>
-            </div>
-            <p class="copyright">&copy; 2026 Yincheng Zhou. Built with Vanilla HTML/CSS.</p>
-        </div>
-    </footer>
-
-    <script src="js/script.js"></script>
+    </main>
 </body>
-
 </html>

@@ -1,0 +1,396 @@
+/* ============================================================
+   Yincheng Zhou — personal site
+   Plain HTML + CSS. No JS. No frameworks. ~6 KB.
+   ============================================================ */
+
+:root {
+    --bg: #fefdfa;          /* almost-white, faint warm tint */
+    --text: #1a1a1a;        /* off-black, easier on eyes than pure black */
+    --muted: #707070;
+    --accent: #8a3324;      /* burnt sienna — links only */
+    --accent-soft: rgba(138, 51, 36, 0.35);
+    --rule: #e6e1d6;        /* warm rule color */
+    --max-w: 640px;
+    --serif: 'Source Serif 4', 'Source Serif Pro', 'Charter', Georgia, serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html {
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 1rem;
+    line-height: 1.72;
+    color: var(--text);
+    background: var(--bg);
+    /* OpenType: kerning, ligatures, contextual alternates, old-style figures */
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "onum" 1;
+}
+
+main {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 5.5rem 1.5rem 4rem;
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+    margin-bottom: 3rem;
+}
+
+.site-header h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem;
+    letter-spacing: -0.012em;
+    line-height: 1.2;
+}
+
+.site-header .subtitle {
+    margin: 0;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 0.98rem;
+}
+
+/* ---------- Sections ---------- */
+
+section {
+    margin: 0 0 2.5rem;
+}
+
+h2 {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 0.85rem;
+    color: var(--muted);
+    text-transform: lowercase;
+    letter-spacing: 0.025em;
+    /* Small flourish: hanging indent dot */
+    position: relative;
+}
+
+p {
+    margin: 0 0 1rem;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+p.meta {
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+p.meta em {
+    font-style: italic;
+}
+
+/* ---------- Bio dropcap ---------- */
+
+.bio p {
+    /* Slightly larger lead paragraph */
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+
+.dropcap {
+    float: left;
+    font-family: var(--serif);
+    font-size: 3.5rem;
+    line-height: 0.88;
+    font-weight: 500;
+    margin: 0.32rem 0.6rem 0 0;
+    color: var(--text);
+    /* OpenType stylistic alternates if the font ships them */
+    font-feature-settings: "ss01" 1, "kern" 1;
+}
+
+/* ---------- Links ---------- */
+
+a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2.5px;
+    text-decoration-color: var(--accent-soft);
+    transition: text-decoration-color 0.15s ease;
+}
+
+a:hover {
+    text-decoration-color: var(--accent);
+}
+
+a:focus-visible {
+    outline: 2px solid var(--accent-soft);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+/* ---------- Typographic touches ---------- */
+
+cite {
+    font-style: italic;
+}
+
+abbr[title] {
+    text-decoration: none;
+    border-bottom: 1px dotted var(--muted);
+    cursor: help;
+}
+
+em {
+    font-style: italic;
+}
+
+.dot {
+    color: var(--muted);
+    padding: 0 0.4em;
+}
+
+/* ---------- Ornamental section divider ---------- */
+
+hr.ornament {
+    border: 0;
+    text-align: center;
+    margin: 3rem auto;
+    height: 1rem;
+    width: 100%;
+    overflow: visible;
+}
+
+hr.ornament::after {
+    content: "❦";  /* fleuron */
+    display: inline-block;
+    color: var(--rule);
+    font-size: 1.15rem;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+/* ---------- Entry lists (writing, etc.) ---------- */
+
+ul.entries {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.entries li {
+    display: flex;
+    align-items: baseline;
+    gap: 1.25rem;
+    margin: 0.5rem 0;
+    padding: 0;
+}
+
+ul.entries .date {
+    flex-shrink: 0;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
+    /* Monospace gives stable column alignment */
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Plain ul (reading) ---------- */
+
+ul.bare {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.bare li {
+    margin: 0.45rem 0;
+    padding-left: 1.1rem;
+    position: relative;
+}
+
+ul.bare li::before {
+    content: "·";
+    color: var(--muted);
+    position: absolute;
+    left: 0.25rem;
+    top: 0;
+    font-weight: 600;
+}
+
+/* ---------- Footer / colophon ---------- */
+
+.colophon {
+    margin-top: 5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+.colophon p {
+    margin: 0;
+}
+
+/* ============================================================
+   Article (essay) pages
+   ============================================================ */
+
+article.essay {
+    /* Slightly wider for prose */
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+article.essay header {
+    margin: 0 0 2.5rem;
+}
+
+article.essay h1 {
+    font-size: 1.55rem;
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0 0 0.6rem;
+    letter-spacing: -0.012em;
+}
+
+article.essay .essay-meta {
+    color: var(--muted);
+    font-size: 0.88rem;
+    font-style: italic;
+    margin: 0;
+}
+
+article.essay h2 {
+    color: var(--text);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 1.1rem;
+    margin: 2.25rem 0 0.75rem;
+}
+
+article.essay h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.5rem;
+}
+
+article.essay blockquote {
+    margin: 1.25rem 0;
+    padding: 0 0 0 1.25rem;
+    border-left: 2px solid var(--rule);
+    color: var(--text);
+    font-style: italic;
+}
+
+article.essay code {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    background: rgba(138, 51, 36, 0.06);
+    padding: 0.08em 0.32em;
+    border-radius: 2px;
+}
+
+article.essay pre {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    line-height: 1.55;
+    background: #f7f4ec;
+    border-left: 2px solid var(--rule);
+    padding: 1rem 1.15rem;
+    overflow-x: auto;
+    margin: 1.25rem 0;
+}
+
+article.essay pre code {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: 1em;
+}
+
+article.essay hr {
+    border: 0;
+    text-align: center;
+    margin: 2rem 0;
+    height: 1rem;
+}
+
+article.essay hr::after {
+    content: "* * *";
+    color: var(--rule);
+    letter-spacing: 0.5em;
+}
+
+article.essay .footnote-ref {
+    font-size: 0.75em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+.essay-nav {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.88rem;
+    color: var(--muted);
+}
+
+.essay-nav a {
+    color: var(--accent);
+}
+
+/* ============================================================
+   Print
+   ============================================================ */
+
+@media print {
+    body {
+        background: white;
+        color: black;
+        font-size: 11pt;
+    }
+    main { max-width: 100%; padding: 0; }
+    a { color: black; text-decoration: underline; }
+    hr.ornament::after { color: #999; }
+    .colophon { display: none; }
+}
+
+/* ============================================================
+   Mobile
+   ============================================================ */
+
+@media (max-width: 540px) {
+    html { font-size: 17px; }
+    main { padding: 3.5rem 1.25rem 3rem; }
+    .site-header { margin-bottom: 2.25rem; }
+    .site-header h1 { font-size: 1.55rem; }
+    .bio p { font-size: 1rem; }
+    .dropcap { font-size: 3rem; margin-right: 0.5rem; }
+    hr.ornament { margin: 2.25rem auto; }
+    ul.entries li {
+        flex-direction: column;
+        gap: 0.15rem;
+        margin: 0.85rem 0;
+    }
+    ul.entries .date { font-size: 0.78rem; }
+    .colophon { margin-top: 3.5rem; }
+}
+
+@media (max-width: 380px) {
+    main { padding: 2.75rem 1.1rem 2.5rem; }
+    .dropcap { font-size: 2.75rem; }
+}

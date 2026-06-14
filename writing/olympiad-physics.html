@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On Olympiad physics and engineering intuition — Yincheng Zhou</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <article class="essay">
+
+            <header>
+                <h1>On Olympiad physics and engineering intuition</h1>
+                <p class="essay-meta">June&nbsp;2026 &middot; ~&nbsp;8&nbsp;min read</p>
+            </header>
+
+            <h2>The problem about the magnet</h2>
+
+            <p>One of the first problems I remember from olympiad training was a magnet falling through a copper tube. You're told the magnet's mass, the tube's conductivity, the geometry. You're asked for the terminal velocity. The point of the problem isn't to plug numbers into a formula &mdash; the formula is the easy part. The point is to <em>see</em> what's happening: the induced eddy currents resist motion, they dissipate energy as heat, the magnet falls slower than it would in free air. Once you see that, the equation almost writes itself.</p>
+
+            <p>I think about that problem a lot when I'm debugging systems.</p>
+
+            <h2>Two ways of knowing</h2>
+
+            <p>There's a way of doing physics that I'll call <em>formula-first</em>: you memorize the equations, you recognize which one applies, you solve. It works for textbook problems and breaks immediately when the problem isn't textbook. Most of olympiad training is the opposite. You're taught to <em>not</em> reach for the equation first. You're taught to ask: what does the system want to do? What's resisting it? Where does the energy go?</p>
+
+            <p>That habit transferred almost cleanly when I started writing code.</p>
+
+            <h3>Three places it shows up</h3>
+
+            <ul>
+                <li><strong>Latency budgets.</strong> When I'm profiling a hot path, the first question isn't &ldquo;which line is slow.&rdquo; It's &ldquo;where would the time <em>have</em> to go.&rdquo; Cache miss? Branch prediction? Allocation? You're estimating before you measure, the same way you estimate before you compute.</li>
+                <li><strong>Distributed systems.</strong> A consumer is lagging behind a producer. The textbook answer is &ldquo;backpressure.&rdquo; The physics answer is closer: there's a flow rate, there's a downstream resistance, the queue is the capacitor that absorbs the difference. Once you see the system as a circuit, the design choices clarify.</li>
+                <li><strong>Training dynamics.</strong> When a loss curve flattens earlier than expected, the question isn't &ldquo;is the learning rate wrong.&rdquo; It's &ldquo;what gradient signal is the model not receiving.&rdquo; The diagnosis is the same shape as &ldquo;why is the magnet falling at terminal velocity already.&rdquo;</li>
+            </ul>
+
+            <h2>Where the analogy breaks</h2>
+
+            <p>I don't want to oversell this. Physics intuition fails me in at least three places:</p>
+
+            <ul>
+                <li>State machines &mdash; conservation laws don't help; you just have to track the cases.</li>
+                <li>Distributed consensus &mdash; the failure modes are combinatorial, not continuous.</li>
+                <li>Anything involving humans &mdash; I'm still working on this one.</li>
+            </ul>
+
+            <h2>Why I keep going back</h2>
+
+            <p>The thing olympiad physics gave me wasn't a technique. It was a habit: <em>look at the system before you start solving</em>. That habit has been more useful than any single algorithm class or framework. It's also the part of how I think that I most want to protect as I get older &mdash; the easy default, when you've been writing code for a few years, is to recognize patterns and skip the look.</p>
+
+            <p>I try not to skip the look.</p>
+
+            <hr aria-hidden="true">
+
+            <p><em>Thanks for reading.</em></p>
+
+            <nav class="essay-nav">
+                <p><a href="../index.html">&larr; back</a></p>
+            </nav>
+
+        </article>
+    </main>
+</body>
+</html>
