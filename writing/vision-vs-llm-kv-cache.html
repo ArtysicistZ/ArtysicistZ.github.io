@@ -18,68 +18,59 @@
                 <p class="essay-meta">June&nbsp;2026 &middot; ~&nbsp;10&nbsp;min read</p>
             </header>
 
-            <p>If you've spent any time around modern LLM inference, you've internalized one of its most important optimizations: KV caching. Every new token's keys and values are computed once, stored, and reused for the rest of the sequence. The savings are enormous and the math is exact &mdash; the cache is not an approximation of what attention would have produced; it <em>is</em> what attention would have produced.</p>
+            <p>Anyone who has worked on LLM inference knows the standard optimization: KV caching. Each new token's keys and values are computed once, stored, and reused for the rest of the sequence. The savings are large. The math is exact. The cache is not an approximation of what attention would have produced. It <em>is</em> what attention would have produced.</p>
 
-            <p>It's natural to look at video vision transformers and ask the obvious question. Consecutive frames share most of their content &mdash; VideoMAE famously showed 90&ndash;95% temporal token redundancy in natural video. The encoder is the expensive part. Why not cache K and V across frames the way we cache them across tokens?</p>
+            <p>The same trick should work for video vision transformers, in theory. Consecutive frames share most of their content. VideoMAE measured 90 to 95 percent temporal token redundancy in natural video. The encoder is the expensive part of a video pipeline. There is enormous room for reuse. So why not cache K and V across frames the way they get cached across tokens?</p>
 
-            <p>I spent several weeks on this question for a sparse-depth pipeline, read most of the relevant literature, and ended up where the field has converged: it does not work the way you'd hope. The reason is structural, not engineering &mdash; and it's worth understanding precisely, because the cleanest way to see why a technique <em>won't</em> port is usually to look at the assumptions it depended on in the place it came from.</p>
+            <p>I spent several weeks on this question for a sparse-depth pipeline, read most of the relevant literature, and ended up where the field has converged. It does not work in the way the analogy suggests. The reason is structural, not engineering. Looking at it carefully is useful: the cleanest way to see why a technique fails to port is to look at the assumption it depended on where it came from.</p>
 
             <h2>The assumption that does most of the work</h2>
 
-            <p>LLM KV caching works because LLM attention is causal. Token <code>i</code> only attends to tokens <code>0</code> through <code>i</code>. Once token <code>i</code>'s key and value are computed, no future token can change them &mdash; <code>k_i</code> and <code>v_i</code> were computed from token <code>i</code>'s embedding, which was computed from token <code>i</code>'s representation in the layer below, which depended only on tokens <code>0</code> through <code>i</code>. Causality propagates cleanly down the stack.</p>
+            <p>LLM KV caching works because LLM attention is causal. Token <code>i</code> only attends to tokens <code>0</code> through <code>i</code>. Once token <code>i</code>'s key and value are computed, no future token can change them. The information that produced <code>k_i</code> and <code>v_i</code> is, by construction, frozen forever. Each new token extends the sequence without disturbing what came before. Causality propagates cleanly down the stack. The cache is exact because the values it stores are exact.</p>
 
-            <p>That's the whole reason the cache is exact rather than approximate. The information that produced <code>k_i</code> and <code>v_i</code> is, by construction, frozen forever. Each new token extends the sequence without disturbing what came before.</p>
+            <p>ViT encoders use global self-attention. Every patch token attends to every other patch token, in every layer. If even one patch in the input changes, because that part of the scene moved or because the camera shifted slightly, the correct K and V vectors for <em>all</em> patches change. Every patch's layer-1 representation was computed by attending to the now-changed patch. Every layer-2 representation was computed by attending to every layer-1 representation. Down the line.</p>
 
-            <p>ViT encoders use global self-attention. Every patch token attends to every other patch token, in every layer. If even one patch in the input changes &mdash; because that part of the scene moved, or because the camera shifted slightly &mdash; the correct K and V vectors for <em>all</em> patches change, because every patch's layer-1 representation was computed by attending to the now-changed patch, and every layer-2 representation was computed by attending to every layer-1 representation, and so on down the line.</p>
+            <p>This is not an implementation artifact. It is the math. Global self-attention is, by definition, a function where every output depends on every input. There is no causal partition to exploit.</p>
 
-            <p>This isn't an artifact of how anyone implemented attention. It's the math. Global self-attention is, by definition, a function in which every output depends on every input. There is no causal partition to exploit.</p>
+            <h2>What &ldquo;vision KV cache reuse&rdquo; actually means</h2>
 
-            <h2>So what does "vision KV cache reuse" actually mean?</h2>
+            <p>The proposals in the literature do not claim exact caching. They claim that for patches whose input tokens are similar to the previous frame's input tokens, the K and V vectors are <em>approximately</em> similar to the previous frame's K and V vectors. Close enough to substitute without collapsing downstream accuracy.</p>
 
-            <p>The proposals in the literature don't claim exact caching. They claim that for patches whose <em>input</em> tokens are similar to the previous frame's input tokens, the K and V vectors are <em>approximately</em> similar to the previous frame's K and V vectors &mdash; close enough that you can substitute them and the downstream task accuracy doesn't collapse.</p>
+            <p>That is a reasonable engineering proposition. It is also a different proposition. The technique has moved from caching (memoize a deterministic function) to approximating (substitute one value for another and hope the error is small). Accuracy floors, error bounds, and worst cases become things that have to be analyzed.</p>
 
-            <p>This is a perfectly reasonable engineering proposition, but it's a different proposition. We've moved from <em>caching</em> (memoize a deterministic function) to <em>approximating</em> (substitute one value for another and hope the error is small). The accuracy floor, the error bounds, and the worst case all become things you have to reason about.</p>
+            <p>The most thoughtful work in this space is <a href="https://arxiv.org/abs/2308.13494">Eventful Transformers</a> (Dutson et al., ICCV&nbsp;2023). It introduces three coordinated mechanisms. A token gate compares each token against a stored reference and selects only the tokens whose change exceeds a threshold for recomputation. A token buffer fills unchanged positions from storage after sparse processing. Sparse attention updates compute <code>QK&#8868;</code> changes selectively from delta-based queries and keys. On ImageNet&nbsp;VID detection and EPIC-Kitchens action recognition, the result is 2&ndash;4&times; speedup with minor accuracy loss, training-free.</p>
 
-            <p>The most thoughtful work in this space is <a href="https://arxiv.org/abs/2308.13494">Eventful Transformers</a> (Dutson et al., ICCV 2023). It introduces three coordinated mechanisms: a token gate that compares each token against a stored reference and selects only the tokens whose change exceeds a threshold for recomputation, a token buffer that fills unchanged positions from storage after sparse processing, and sparse attention updates that compute the <code>QK&#8868;</code> changes selectively from delta-based queries and keys. On ImageNet VID detection and EPIC-Kitchens action recognition, it gets 2&ndash;4&times; speedup with minor accuracy loss, training-free.</p>
-
-            <p>That is a real, useful, deployable result. It's also worth noting what it doesn't do. It doesn't skip the patch projection &mdash; you have to compute the initial token embeddings to run the gate at all. The savings come from skipping self-attention for unchanged tokens, not from skipping the encoder. And the accuracy degrades under high motion, which is precisely where you most need it not to.</p>
+            <p>That is a real, useful, deployable result. The savings come from skipping the expensive attention layers for static tokens, not from skipping the encoder. The patch projection still runs. The gate evaluation still runs. And the accuracy degrades under high motion, precisely where the speedup matters most.</p>
 
             <h2>What the field has actually settled on</h2>
 
-            <p>Look at where the state of the art has converged in video depth estimation &mdash; one of the most demanding domains for both efficiency and accuracy:</p>
+            <p>Look at where the state of the art has converged in video depth estimation, one of the most demanding domains for both efficiency and accuracy. <a href="https://arxiv.org/abs/2501.12375">Video Depth Anything</a> (CVPR&nbsp;2025) recomputes the encoder per frame and adds temporal attention layers in the DPT head. <a href="https://arxiv.org/abs/2504.07093">FlashDepth</a> (ICCV&nbsp;2025) recomputes the encoder per frame and adds a Mamba recurrent module (around 1% of parameters) for temporal coherence. StableDPT and Online Video Depth Anything follow the same pattern. Encoder recomputed. Temporal logic in the decoder.</p>
 
-            <ul>
-                <li><a href="https://arxiv.org/abs/2501.12375">Video Depth Anything</a> (CVPR 2025): recompute the encoder per frame, add temporal attention layers in the DPT head.</li>
-                <li><a href="https://arxiv.org/abs/2504.07093">FlashDepth</a> (ICCV 2025): recompute the encoder per frame, add a Mamba recurrent module (~1% of parameters) for temporal coherence.</li>
-                <li>StableDPT, Online Video Depth Anything: same pattern &mdash; encoder recomputed, temporal logic in the decoder.</li>
-            </ul>
+            <p>No recent video-depth method caches the encoder. The one partial exception, VeloDepth, runs the full encoder on keyframes and uses optical-flow-warped features for intermediate frames. It explicitly degrades under large motion and requires periodic full recomputation.</p>
 
-            <p>There is essentially no recent video-depth method that caches the encoder. The one partial exception, VeloDepth, runs the full encoder on keyframes and uses optical-flow-warped features for intermediate frames &mdash; but it explicitly degrades under large motion and requires periodic full recomputation.</p>
-
-            <p>This is the field's empirical answer to the original question: <em>encoder recomputation is cheap enough, relative to the cost of the errors that feature reuse introduces.</em> Whatever savings you get from skipping the encoder are eaten by the temporal-module complexity you need to compensate for stale features.</p>
+            <p>This is the field's empirical answer to the original question. Encoder recomputation is cheap enough relative to the cost of the errors that feature reuse introduces. Whatever savings come from skipping the encoder are eaten by the temporal-module complexity needed to compensate for stale features.</p>
 
             <h2>What does port from LLM caching</h2>
 
-            <p>Not everything from LLM KV-cache literature is dead on arrival in vision. Several techniques transfer cleanly because they operate on the cache's <em>storage</em> or <em>shape</em>, not on whether the values are still correct:</p>
+            <p>Not everything from the LLM KV-cache literature is dead on arrival in vision. Several techniques transfer cleanly because they operate on the cache's storage or shape, not on whether the values are still correct.</p>
 
-            <ul>
-                <li><strong>Grouped Query Attention.</strong> Share K and V heads across query heads. Works in vision the same way it works in language &mdash; the K/V representation gets smaller, attention output is mathematically identical up to the sharing. 4&ndash;8&times; KV memory reduction, requires retraining.</li>
-                <li><strong>KV quantization.</strong> Store cached features in FP8 or INT4. Reduces memory by 2&ndash;4&times; with negligible accuracy cost. Training-free.</li>
-                <li><strong>Sliding window attention.</strong> Bound the temporal context. Analogous to a fixed-window historical buffer in vision &mdash; the math is the same, you're just deciding how far back to remember.</li>
-                <li><strong>Token eviction.</strong> Drop tokens that contribute little to subsequent computation. <a href="https://arxiv.org/abs/2509.17650">Evict3R</a> shows this works for vision: 50% peak memory reduction, training-free.</li>
-            </ul>
+            <p><strong>Grouped Query Attention.</strong> Share K and V heads across query heads. Works in vision the same way as in language: the K/V representation gets smaller, attention output is mathematically identical up to the sharing. 4 to 8&times; KV memory reduction. Requires retraining.</p>
 
-            <p>These are all techniques that don't require the cached values to remain correct. They either reshape the cache, compress it, bound it, or prune it &mdash; without claiming that yesterday's K and V are still the right answer.</p>
+            <p><strong>KV quantization.</strong> Store cached features in FP8 or INT4. 2 to 4&times; memory reduction with negligible accuracy cost. Training-free.</p>
+
+            <p><strong>Sliding window attention.</strong> Bound the temporal context. Analogous to a fixed-window historical buffer in vision. Same math, just a choice of how far back to remember.</p>
+
+            <p><strong>Token eviction.</strong> Drop tokens that contribute little to subsequent computation. <a href="https://arxiv.org/abs/2509.17650">Evict3R</a> demonstrates this for vision: 50 percent peak memory reduction, training-free.</p>
+
+            <p>These share a property. None of them require the cached values to remain correct. They reshape the cache, compress it, bound it, or prune it. They do not claim that yesterday's K and V are still the right answer.</p>
 
             <h2>Where the deeper insight lives</h2>
 
-            <p>I think the wider lesson here generalizes beyond attention. Whenever you port a technique across architectures, the first question to ask is: <em>what assumption does this technique depend on?</em> KV caching in LLMs depends on causality. Compiler memoization depends on referential transparency. Database materialized views depend on bounded update rates. Build-system incremental compilation depends on dependency declarations being honest.</p>
+            <p>The wider lesson generalizes beyond attention. Whenever a technique gets ported across architectures, the first question is: what assumption does this technique depend on? KV caching in LLMs depends on causality. Compiler memoization depends on referential transparency. Database materialized views depend on bounded update rates. Build-system incremental compilation depends on dependency declarations being honest.</p>
 
-            <p>When the assumption holds, the technique is exact and the savings are nearly free. When the assumption is approximately true, the technique becomes an approximation, and you've taken on a new responsibility: bounding the error. When the assumption doesn't hold at all, the technique either has to be redesigned around a different assumption (the recurrent-state and merge-and-compress lineages for vision are exactly this) or abandoned in favor of plain recomputation.</p>
+            <p>When the assumption holds, the technique is exact and the savings are nearly free. When the assumption is approximately true, the technique becomes an approximation, and a new responsibility appears: bounding the error. When the assumption fails entirely, the technique either has to be redesigned around a different assumption or abandoned for plain recomputation.</p>
 
-            <p>The reason "just cache it" tends to fail in vision is not that vision is harder than language. It's that vision attention was designed under a different set of priors, and one of those priors &mdash; <em>any patch's representation can depend on any other patch's representation</em> &mdash; is the thing the caching assumption needed to be false. The interesting engineering question stops being "how do we make vision caching work" and becomes "what's the cheapest way to <em>express</em> the assumption that does hold in video, namely temporal coherence in the output, not in the intermediate features." That question has produced the recurrent-state, token-merge, and sparse-recompute architectures that now win benchmarks.</p>
-
-            <p>Sometimes the right answer to "can we just borrow this trick" is no, and the more interesting work happens after you accept that.</p>
+            <p>&ldquo;Just cache it&rdquo; fails in vision not because vision is harder than language. It fails because vision attention was designed under a different set of priors, and one of those priors, that any patch's representation can depend on any other patch's representation, is exactly the thing the caching assumption needed to be false. The interesting engineering question stops being how to make vision caching work. It becomes what is the cheapest way to express the assumption that does hold in video: temporal coherence in the output, not in the intermediate features. That question has produced the recurrent-state, token-merge, and sparse-recompute architectures that now win benchmarks.</p>
 
             <hr aria-hidden="true">
 

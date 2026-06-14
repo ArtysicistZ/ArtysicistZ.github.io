@@ -1,14 +1,13 @@
-# Yincheng Zhou - Personal Portfolio
+# yincheng zhou
 
-This is the source code for my personal portfolio website, hosted at [artysicistz.github.io](https://artysicistz.github.io).
+Source for [artysicistz.github.io](https://artysicistz.github.io).
 
-## About Me
-I am a dual-degree student at the **University of Pennsylvania** in the **VIPER program**, studying **Computer & Information Science** and **Physics**. Currently, I am the Founding Software Engineer at **Franklink, Inc.**
+Plain HTML and CSS. No JavaScript. No build step. Source Serif 4 for body, IBM Plex Mono for code.
 
-## Built With
-- **HTML5** & **CSS3** (Vanilla, no heavy frameworks)
-- **JavaScript** (Minimal logic for interactions)
-- **Responsive Design** (Mobile-first approach)
+## Layout
 
-## Live Site
-Visit the live website here: [https://artysicistz.github.io](https://artysicistz.github.io)
+- `index.html`: homepage
+- `style.css`: site styles
+- `writing/`: essays
+- `assets/`: resume sources
+- `archive/`: previous version of the site

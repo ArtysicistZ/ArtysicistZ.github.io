@@ -15,48 +15,46 @@
 
             <header>
                 <h1>On Olympiad physics and engineering intuition</h1>
-                <p class="essay-meta">June&nbsp;2026 &middot; ~&nbsp;8&nbsp;min read</p>
+                <p class="essay-meta">June&nbsp;2026 &middot; ~&nbsp;6&nbsp;min read</p>
             </header>
 
             <h2>The problem about the magnet</h2>
 
-            <p>One of the first problems I remember from olympiad training was a magnet falling through a copper tube. You're told the magnet's mass, the tube's conductivity, the geometry. You're asked for the terminal velocity. The point of the problem isn't to plug numbers into a formula &mdash; the formula is the easy part. The point is to <em>see</em> what's happening: the induced eddy currents resist motion, they dissipate energy as heat, the magnet falls slower than it would in free air. Once you see that, the equation almost writes itself.</p>
+            <p>One of the first problems I remember from olympiad training was a magnet falling through a copper tube. Given: the magnet's mass, the tube's conductivity, the geometry. Asked: the terminal velocity. The point of the problem is not to plug numbers into a formula. The formula is the easy part. The point is to <em>see</em> what is happening. Induced eddy currents resist motion. They dissipate energy as heat. The magnet falls slower than it would in free air. Once that picture is clear, the equation almost writes itself.</p>
 
-            <p>I think about that problem a lot when I'm debugging systems.</p>
+            <p>I think about that problem a lot when debugging systems.</p>
 
             <h2>Two ways of knowing</h2>
 
-            <p>There's a way of doing physics that I'll call <em>formula-first</em>: you memorize the equations, you recognize which one applies, you solve. It works for textbook problems and breaks immediately when the problem isn't textbook. Most of olympiad training is the opposite. You're taught to <em>not</em> reach for the equation first. You're taught to ask: what does the system want to do? What's resisting it? Where does the energy go?</p>
+            <p>There are two ways of doing physics. The first I will call <em>formula-first</em>: memorize the equations, recognize which one applies, solve. It works for textbook problems and breaks immediately when the problem is not textbook. Olympiad training is the opposite. The first instruction is not to reach for the equation. The first instruction is to ask what the system wants to do. What is resisting it. Where the energy goes.</p>
 
             <p>That habit transferred almost cleanly when I started writing code.</p>
 
             <h3>Three places it shows up</h3>
 
             <ul>
-                <li><strong>Latency budgets.</strong> When I'm profiling a hot path, the first question isn't &ldquo;which line is slow.&rdquo; It's &ldquo;where would the time <em>have</em> to go.&rdquo; Cache miss? Branch prediction? Allocation? You're estimating before you measure, the same way you estimate before you compute.</li>
-                <li><strong>Distributed systems.</strong> A consumer is lagging behind a producer. The textbook answer is &ldquo;backpressure.&rdquo; The physics answer is closer: there's a flow rate, there's a downstream resistance, the queue is the capacitor that absorbs the difference. Once you see the system as a circuit, the design choices clarify.</li>
-                <li><strong>Training dynamics.</strong> When a loss curve flattens earlier than expected, the question isn't &ldquo;is the learning rate wrong.&rdquo; It's &ldquo;what gradient signal is the model not receiving.&rdquo; The diagnosis is the same shape as &ldquo;why is the magnet falling at terminal velocity already.&rdquo;</li>
+                <li><strong>Latency budgets.</strong> When profiling a hot path, the first question is not &ldquo;which line is slow.&rdquo; It is &ldquo;where would the time have to go.&rdquo; Cache miss? Branch prediction? Allocation? The habit is to estimate before measuring, the same way physicists estimate before computing.</li>
+                <li><strong>Distributed systems.</strong> A consumer is lagging behind a producer. The textbook answer is &ldquo;backpressure.&rdquo; The physics answer is closer: there is a flow rate, there is a downstream resistance, the queue is the capacitor that absorbs the difference. Once the system reads as a circuit, the design choices clarify.</li>
+                <li><strong>Training dynamics.</strong> When a loss curve flattens earlier than expected, the question is not &ldquo;is the learning rate wrong.&rdquo; It is &ldquo;what gradient signal is the model not receiving.&rdquo; The diagnosis has the same shape as &ldquo;why is the magnet falling at terminal velocity already.&rdquo;</li>
             </ul>
 
             <h2>Where the analogy breaks</h2>
 
-            <p>I don't want to oversell this. Physics intuition fails me in at least three places:</p>
+            <p>I do not want to oversell this. Physics intuition fails me in at least three places.</p>
 
             <ul>
-                <li>State machines &mdash; conservation laws don't help; you just have to track the cases.</li>
-                <li>Distributed consensus &mdash; the failure modes are combinatorial, not continuous.</li>
-                <li>Anything involving humans &mdash; I'm still working on this one.</li>
+                <li>State machines. Conservation laws do not help. Each case has to be tracked.</li>
+                <li>Distributed consensus. The failure modes are combinatorial, not continuous.</li>
+                <li>Anything involving humans. Still working on this one.</li>
             </ul>
 
             <h2>Why I keep going back</h2>
 
-            <p>The thing olympiad physics gave me wasn't a technique. It was a habit: <em>look at the system before you start solving</em>. That habit has been more useful than any single algorithm class or framework. It's also the part of how I think that I most want to protect as I get older &mdash; the easy default, when you've been writing code for a few years, is to recognize patterns and skip the look.</p>
+            <p>What olympiad physics gave me was not a technique. It was a habit: look at the system before solving. That habit has been more useful than any single algorithm class or framework. It is also the part of how I think that I most want to protect as the years pass. The easy default, after a few years of writing code, is to recognize patterns and skip the look.</p>
 
             <p>I try not to skip the look.</p>
 
             <hr aria-hidden="true">
-
-            <p><em>Thanks for reading.</em></p>
 
             <nav class="essay-nav">
                 <p><a href="../index.html">&larr; back</a></p>
