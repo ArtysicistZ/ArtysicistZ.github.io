@@ -33,6 +33,11 @@ body {
     background: var(--bg);
     /* OpenType: kerning, ligatures, contextual alternates, old-style figures */
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "onum" 1;
+    /* Disable text selection across the site. */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 main {
