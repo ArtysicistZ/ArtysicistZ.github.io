@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franklink — Yincheng Zhou</title>
+    <meta name="description" content="Franklink — an AI-native professional network, built entirely inside iMessage.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <article class="essay">
+
+            <header>
+                <h1>Franklink</h1>
+                <p class="essay-meta">An AI-native professional network, built entirely inside iMessage &middot; 2025&ndash;2026</p>
+            </header>
+
+            <p class="project-links">
+                <a href="https://github.com/ArtysicistZ/Franklink">GitHub</a>
+                <span class="dot" aria-hidden="true">·</span>
+                Co-Founder &amp; Tech Lead
+                <span class="dot" aria-hidden="true">·</span>
+                5K+ registered users
+            </p>
+
+            <p>Traditional professional networks make you download an app, build a profile, and message strangers. Franklink inverts that. There is no app and no sign-up form. You text a contact named <em>Frank</em>, and a multi-agent system onboards you, learns what you need and what you can offer, and introduces you to the right people &mdash; one-on-one and in AI-formed group chats. The surface is a single text thread; behind it is a distributed, event-driven platform.</p>
+
+            <p>What follows is the whole experience, in order, as it happens inside one iMessage conversation.</p>
+
+            <section class="demo-step">
+                <p class="step-tag"><span class="step-no">01</span>Onboarding</p>
+                <h3>Meet your AI concierge</h3>
+                <p>Frank reads like texting a friend. It learns your background, interests, and goals through ordinary conversation &mdash; no form to fill out, nothing to install.</p>
+                <figure class="shot shot-phone"><img src="../assets/images/franklink/onboarding-1.png" alt="Onboarding conversation with the Frank AI concierge"></figure>
+            </section>
+
+            <section class="demo-step">
+                <p class="step-tag"><span class="step-no">02</span>Onboarding</p>
+                <h3>Privacy-first login</h3>
+                <p>Read-only email access through OAuth lets Frank learn your professional context without storing sensitive data. The connection is scoped and revocable.</p>
+                <figure class="shot shot-phone"><img src="../assets/images/franklink/onboarding-2.png" alt="Privacy-first email connection flow"></figure>
+            </section>
+
+            <section class="demo-step">
+                <p class="step-tag"><span class="step-no">03</span>Intent</p>
+                <h3>Say what you need</h3>
+                <p>Tell Frank what you are looking for &mdash; interview advice, co-founders, a mentor. The system captures those demand signals and embeds them for semantic matching.</p>
+                <figure class="shot shot-phone"><img src="../assets/images/franklink/supporting-1.png" alt="Defining networking goals in conversation"></figure>
+            </section>
+
+            <section class="demo-step">
+                <p class="step-tag"><span class="step-no">04</span>Intent</p>
+                <h3>Show what you offer</h3>
+                <p>Share your projects and experience. Frank extracts these as value signals and stores them as embeddings, so other members can find you by what you bring to the table.</p>
+                <figure class="shot shot-phone"><img src="../assets/images/franklink/supporting-2.png" alt="Sharing projects and skills with Frank"></figure>
+            </section>
+
+            <section class="demo-step">
+                <p class="step-tag"><span class="step-no">05</span>Networking</p>
+                <h3>Introductions arrive in iMessage</h3>
+                <p>Frank delivers personalized introductions straight to your inbox. People who want to connect reach you through AI-curated messages &mdash; still no app, just a text.</p>
+                <figure class="shot shot-phone"><img src="../assets/images/franklink/networking-1.png" alt="A connection request arriving in iMessage"></figure>
+            </section>
+
+            <section class="demo-step">
+                <p class="step-tag"><span class="step-no">06</span>Networking</p>
+                <h3>The network grows</h3>
+                <p>As new members join, Frank surfaces the relevant introductions and keeps your contacts current. The network grows organically through real-time community announcements.</p>
+                <figure class="shot shot-phone"><img src="../assets/images/franklink/networking-2.png" alt="Network growth notifications"></figure>
+            </section>
+
+            <section class="demo-step">
+                <p class="step-tag"><span class="step-no">07</span>Group formation</p>
+                <h3>AI-formed group chats</h3>
+                <p>Ask Frank to find more people with shared interests and it spins up a multi-person group chat, complete with icebreakers drawn from a knowledge graph of members. Sometimes the first chat becomes the startup.</p>
+                <figure class="shot shot-phone"><img src="../assets/images/franklink/group-matching.png" alt="A multi-person group chat formed by Frank"></figure>
+            </section>
+
+            <hr aria-hidden="true">
+
+            <h2>How it works</h2>
+            <p>A message travels from iMessage through a gateway into a Kafka event pipeline, lands in a pool of stateless agent workers, and returns &mdash; typically within a couple of seconds. A conductor agent reads each message, decides what needs to happen, and dispatches specialized sub-agents that onboard, extract need and value, search a member knowledge graph, and broker introductions.</p>
+
+            <h2>At a glance</h2>
+            <ul class="bare">
+                <li><strong>Role</strong> &mdash; Co-Founder &amp; Tech Lead, leading 3 engineers</li>
+                <li><strong>Stack</strong> &mdash; Python, FastAPI, Kafka, AWS ECS + MSK, Azure OpenAI GPT-4o, Postgres + pgvector, Zep knowledge graph</li>
+                <li><strong>Scale</strong> &mdash; 5K+ registered users, 400+ daily active conversations, 100+ concurrent sessions</li>
+            </ul>
+
+            <nav class="essay-nav">
+                <p><a href="../index.html">&larr; back</a></p>
+            </nav>
+
+        </article>
+    </main>
+</body>
+</html>

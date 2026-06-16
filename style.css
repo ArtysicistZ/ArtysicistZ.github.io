@@ -359,6 +359,62 @@ article.essay .footnote-ref {
 }
 
 /* ============================================================
+   Project demo pages
+   ============================================================ */
+
+.project-links {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0 0 2.5rem;
+}
+
+.demo-step {
+    margin: 2.75rem 0;
+}
+
+.step-tag {
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 0.3rem;
+}
+
+.step-tag .step-no {
+    color: var(--accent);
+    margin-right: 0.55rem;
+}
+
+.demo-step h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+figure.shot {
+    margin: 1.35rem 0 0;
+    text-align: center;
+}
+
+figure.shot img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+}
+
+figure.shot-phone img {
+    max-width: 290px;
+    border-radius: 16px;
+}
+
+@media (max-width: 540px) {
+    figure.shot-phone img { max-width: 230px; }
+}
+
+/* ============================================================
    Print
    ============================================================ */
 

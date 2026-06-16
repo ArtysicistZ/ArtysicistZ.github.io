@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaOne — Yincheng Zhou</title>
+    <meta name="description" content="AlphaOne — per-ticker financial sentiment from a model fine-tuned for target-aware classification.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <article class="essay">
+
+            <header>
+                <h1>AlphaOne</h1>
+                <p class="essay-meta">Per-ticker financial sentiment, beyond the sentence &middot; 2025</p>
+            </header>
+
+            <p class="project-links">
+                <a href="https://github.com/ArtysicistZ/AlphaOne">GitHub</a>
+                <span class="dot" aria-hidden="true">·</span>
+                Personal project
+                <span class="dot" aria-hidden="true">·</span>
+                82.5% accuracy, +13pp over zero-shot GPT-4
+            </p>
+
+            <p>Most sentiment models score a whole sentence. But &ldquo;A crushed earnings while B bled&rdquo; is bullish and bearish at once &mdash; toward different tickers. AlphaOne does <em>target-aware</em> sentiment: it classifies the sentiment expressed toward a specific stock, even in messy multi-entity text, and serves the result as real-time per-ticker trends. The model, DeBERTa-ABSA-v2, was fine-tuned over nine iterations on Reddit's informal language.</p>
+
+            <section class="demo-step">
+                <p class="step-tag"><span class="step-no">01</span>Landing</p>
+                <h3>The model</h3>
+                <p>The landing page states the core idea: DeBERTa-ABSA-v2, trained to classify per-stock sentiment from the kind of informal text where standard, sentence-level models fall apart.</p>
+                <figure class="shot"><img src="../assets/images/alphaone/welcome_hero.png" alt="AlphaOne welcome page"></figure>
+            </section>
+
+            <section class="demo-step">
+                <p class="step-tag"><span class="step-no">02</span>Playground</p>
+                <h3>Interactive inference</h3>
+                <p>Submit any sentence and target tickers for real-time classification. The playground visualizes entity replacement &mdash; what the model actually sees &mdash; and renders a 12-head averaged attention heatmap for interpretability.</p>
+                <figure class="shot"><img src="../assets/images/alphaone/playground_demo.png" alt="Interactive playground with attention heatmap"></figure>
+            </section>
+
+            <section class="demo-step">
+                <p class="step-tag"><span class="step-no">03</span>Operations</p>
+                <h3>The dashboard</h3>
+                <p>A terminal-style view shows a macro sentiment trend aggregated across all 88 tracked assets, daily averages, and a live snapshot of the ingestion pipeline's status.</p>
+                <figure class="shot"><img src="../assets/images/alphaone/dashboard.png" alt="AlphaOne operations dashboard"></figure>
+            </section>
+
+            <section class="demo-step">
+                <p class="step-tag"><span class="step-no">04</span>Analytics</p>
+                <h3>Per-ticker sentiment</h3>
+                <p>Drill into any stock to see its sentiment trend over time, summary statistics, and a sentence-level evidence feed showing exactly which Reddit posts drove each classification.</p>
+                <figure class="shot"><img src="../assets/images/alphaone/sentiment_sample.png" alt="Per-ticker sentiment analytics"></figure>
+            </section>
+
+            <section class="demo-step">
+                <p class="step-tag"><span class="step-no">05</span>Architecture</p>
+                <h3>Six services</h3>
+                <p>The full data flow across six containerized services: a React frontend, a Spring Boot API, Celery workers, a FastAPI inference server, a Redis broker, and PostgreSQL &mdash; orchestrated with Docker Compose.</p>
+                <figure class="shot"><img src="../assets/images/alphaone/architecture_overview.png" alt="Platform architecture diagram"></figure>
+            </section>
+
+            <hr aria-hidden="true">
+
+            <h2>At a glance</h2>
+            <ul class="bare">
+                <li><strong>Model</strong> &mdash; DeBERTa fine-tuned for target-aware (aspect-based) sentiment; 82.5% accuracy, +13pp over zero-shot GPT-4, on 6,287 labeled Reddit triples</li>
+                <li><strong>Stack</strong> &mdash; React, Spring Boot, FastAPI, Celery, Redis, PostgreSQL, Docker Compose</li>
+                <li><strong>Pipeline</strong> &mdash; concurrent ingestion with row-level locking; real-time per-ticker trends across 88 assets</li>
+            </ul>
+
+            <nav class="essay-nav">
+                <p><a href="../index.html">&larr; back</a></p>
+            </nav>
+
+        </article>
+    </main>
+</body>
+</html>
