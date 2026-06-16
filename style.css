@@ -410,8 +410,66 @@ figure.shot-phone img {
     border-radius: 16px;
 }
 
+/* Alternating phone-and-text rows */
+.demo-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin: 2.75rem 0;
+}
+
+.demo-row.reverse { flex-direction: row-reverse; }
+
+.demo-row .demo-copy { flex: 1; }
+
+.demo-row .demo-copy > :last-child { margin-bottom: 0; }
+
+/* Phone mockup */
+.phone {
+    flex: 0 0 auto;
+    width: 218px;
+    padding: 9px;
+    background: #15120e;
+    border-radius: 30px;
+    box-shadow: 0 6px 24px rgba(21, 18, 14, 0.16);
+    position: relative;
+}
+
+.phone .phone-notch {
+    position: absolute;
+    top: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 76px;
+    height: 16px;
+    background: #15120e;
+    border-radius: 0 0 11px 11px;
+    z-index: 2;
+}
+
+.phone .phone-screen {
+    border-radius: 22px;
+    overflow: hidden;
+    background: #000;
+    line-height: 0;
+}
+
+.phone .phone-screen img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 @media (max-width: 540px) {
     figure.shot-phone img { max-width: 230px; }
+    .demo-row,
+    .demo-row.reverse {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.1rem;
+    }
+    .demo-row .phone { width: 230px; }
+    .demo-row .demo-copy { width: 100%; }
 }
 
 /* ============================================================
