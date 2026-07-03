@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On the desktop that kept waiting for a human — Yincheng Zhou</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <article class="essay">
+
+            <header>
+                <h1>On the desktop that kept waiting for a human</h1>
+                <p class="essay-meta">July&nbsp;2026 &middot; ~&nbsp;8&nbsp;min read</p>
+            </header>
+
+            <p>To train a GUI agent, you have to let it use a real computer. For us that meant a Linux desktop the model drives by taking a screenshot, deciding where to click, and clicking, over and over, dozens of times per task. The search that fed the whole project needed a lot of these desktops running at the same time. (I wrote about the algorithm side of it in <a href="searching-the-desktop.html">Why we searched the desktop instead of rewarding the agent</a>.) So for a while my job was a strange one. Get GNOME, a desktop built with great care for one person sitting at one monitor, to run headless, without a GPU, about a hundred and ninety times in parallel, for an audience that was entirely one neural network. Almost every problem I ran into turned out to be the same problem in a different outfit. The desktop kept waiting for a human, and no human was coming.</p>
+
+            <h2>The screenshot came back black</h2>
+
+            <p>The obvious place to start is Xvfb, the standard virtual framebuffer, a pretend screen for machines that do not have a real one. It came up without a word of complaint. The display socket appeared. The screenshot endpoint answered every request I sent it. And every pixel it gave back was black.</p>
+
+            <p>This is the worst kind of bug. Nothing had actually failed. The framebuffer was alive, the server reported a perfectly valid frame, and the frame was a rectangle of nothing. It turns out GNOME Shell on Xvfb will happily render into a buffer that never gets painted. The whole pipeline runs start to finish and produces darkness, and there is no log line anywhere that says "working, but invisible."</p>
+
+            <p>The fix was to stop faking the screen and fake the monitor instead. I swapped Xvfb for a real Xorg server running the <code>dummy</code> video driver. That is a graphics card that exists only in software, handed a mode line for a 1920 by 1080 display nobody will ever plug in and 256 megabytes of imaginary video memory. The dummy driver paints a real surface, and the screenshots started coming back with an actual desktop on them. I trusted it so little after that week that the boot script now paints the empty background a solid slate blue before the session even starts, just so a desktop that is still coming up looks different from one that has died. I had stopped believing that black could only mean one thing.</p>
+
+            <h2>GNOME wanted a GPU it didn't have</h2>
+
+            <p>Even with something to draw on, GNOME still refused to start. Before it does anything else it runs a little program called <code>gnome-session-check-accelerated</code>, which asks the graphics stack whether it can do hardware acceleration. On a machine with no GPU the answer is no, and GNOME treats no as fatal. The check returns exit code <code>512</code> and the whole session gives up before a single window appears.</p>
+
+            <p>Half of the fix is honest. Mesa has a renderer called <code>llvmpipe</code> that runs the graphics pipeline on the CPU, doing in plain instructions what a GPU normally does in parallel. Set <code>LIBGL_ALWAYS_SOFTWARE=1</code>, point the loader at <code>llvmpipe</code>, and the desktop really can draw. Slowly, on the processor, but correctly. The other half of the fix is not honest at all. I replaced <code>gnome-session-check-accelerated</code> with a script whose entire contents are <code>exit 0</code>. With no way left to ask the question, GNOME came up. It never finds out there is no GPU. It just gets told, every single time, that everything is fine.</p>
+
+            <p>There was one more refusal under that one. GNOME Shell wants a <code>logind</code> login session, the thing that gets created when a person types their password at a login screen. No person, no login, no session. So the desktops run GNOME Flashback instead, the older Metacity session that gives you the same nautilus-and-panels desktop without insisting that somebody log in. It asks for less, and what it asks for, a container can actually give it.</p>
+
+            <h2>Everything helpful was in the way</h2>
+
+            <p>Even once it was running, the desktop kept trying to be useful to a user who was not there, and every little courtesy landed right in the agent's path.</p>
+
+            <ul>
+                <li><strong>The welcome wizard.</strong> <code>gnome-initial-setup</code>, the friendly first-login walkthrough for language and keyboard and privacy settings, opened on top of everything and waited for someone to make choices. I turned it off.</li>
+                <li><strong>The screensaver.</strong> After a while with no activity, the desktop would dutifully blank the screen and lock it, keeping a passerby out. The only user here was a model that never touches the mouse unless it is told to, so it always looked idle, so the screen always locked, and the agent got shut out of its own session. I killed it at startup, and then killed it again on a loop in case it came back.</li>
+                <li><strong>The keyring.</strong> Chrome, the first time it launches, asks <code>gnome-keyring</code> to store a secret, which pops up a "choose a password for your new keyring" box and waits, very patiently, for a human to type one in. I deleted the keyring's D-Bus service files so Chrome falls back to plain storage and stops asking.</li>
+                <li><strong>The housekeepers.</strong> The update notifier, and the file indexer quietly scanning the home folder. Both are harmless on a laptop. Multiply them across a hundred and ninety containers and they were eating CPU I had exactly none of to give. Off they went, one autostart file at a time.</li>
+            </ul>
+
+            <p>All of these are the right thing to do on a person's computer. Every one of them gets in the way when the user is a model and there are a hundred and ninety of them.</p>
+
+            <h2>At scale the desktop stops being the enemy</h2>
+
+            <p>Once a single desktop was solid, the real opponent changed. Getting one to run is a graphics problem. Getting a hundred and ninety to run is a kernel problem, and the kernel fails in flatter, stranger ways.</p>
+
+            <p>Each container boots <code>systemd</code> as its first process and lays an overlay over the home directory, so a task can make whatever mess it wants and then get wiped back to a clean slate for the next one. Every one of those wants a small pile of <code>inotify</code> watches to notice when files change. The host has a default ceiling on how many <code>inotify</code> instances can exist, and it is a modest three-digit number. You never see it until you cross about sixty-four containers at once, and then a third of them just die at boot with exit code <code>255</code> and no message you would ever connect to the cause. They are simply gone. The fix is one line of <code>sysctl</code> that raises the limit. Working out that this was the fix took most of a day.</p>
+
+            <p><code>/tmp</code> gave me the same kind of afternoon. <code>systemd</code> likes to remount it fresh after boot, and a routine cleanup rule likes to wipe its contents on a timer. Both of those are the operating system being tidy about temporary files. Both of them, here, were quietly deleting the overlay session directories that another service had built a few seconds earlier, and the desktop would fall over for reasons that pointed nowhere useful. The fixes are one line each. The afternoons I spent proving that a well-meaning cleanup was the thing killing me were not.</p>
+
+            <h2>What the whole thing was really about</h2>
+
+            <p>I spent more time on this than on the algorithm it was there to serve, and to my own surprise I did not resent a minute of it. It was the same kind of problem I grew up on in physics. Nothing was broken. Everything was behaving exactly the way it was designed to. The whole job was finding which of the system's perfectly reasonable assumptions had quietly stopped being true.</p>
+
+            <p>A desktop assumes a person. Everything else follows from that one assumption. That there is a monitor to look at it, a GPU to render it, a login that called it into being, a hand that will answer the dialog and read the notification and pick the keyring password, a filesystem worth tidying between sessions. Take the person out of the picture and every one of those flips from a convenience into an obstacle, one after another, and the work is just to go down the list and tell the machine, gently and in the right order, that this time nobody is coming.</p>
+
+            <p>The model never noticed any of it. It took its screenshots of a desktop that no human would ever look at, drawn on a processor that was never meant to draw, and it clicked where it meant to click. Which was the whole point.</p>
+
+            <hr aria-hidden="true">
+
+            <nav class="essay-nav">
+                <p><a href="../index.html">&larr; back</a></p>
+            </nav>
+
+        </article>
+    </main>
+</body>
+</html>

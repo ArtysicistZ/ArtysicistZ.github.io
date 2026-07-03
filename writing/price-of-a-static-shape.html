@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On the price of a static shape — Yincheng Zhou</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <article class="essay">
+
+            <header>
+                <h1>On the price of a static shape</h1>
+                <p class="essay-meta">July&nbsp;2026 &middot; ~&nbsp;11&nbsp;min read</p>
+            </header>
+
+            <p>When I was trying to make a depth model fast enough to run on a robot, I spent a while treating three tools as if they were competing answers to the same question. <code>torch.compile</code>, CUDA graphs, and hand-fused kernels. Pick the best one, turn it on, collect the speedup. That framing cost me a week. They are not three answers to one question. They are three answers to three different questions, stacked on top of each other, and the reason they get confused is that all three are doing the same underlying thing. They move work out of the hot loop and into some earlier moment, so that when the robot is actually running, the GPU does arithmetic and almost nothing else.</p>
+
+            <p>The catch, and the thing this essay is really about, is that all three charge for that speed in the same currency. You pay in staticness. The faster you want to go, the less your program is allowed to change at run time.</p>
+
+            <h2>Three different bills</h2>
+
+            <p>It helps to start with where the time actually goes in an unoptimized forward pass, because each of the three targets a different line on the bill.</p>
+
+            <p>A fused kernel goes after memory traffic. A chain of small operations, a normalize then a scale then an activation, will each read its input all the way from GPU memory and write its output all the way back, and on modern hardware that round trip costs far more than the arithmetic in between. Fusing means doing the whole chain in one kernel while the data sits in registers and shared memory, so it makes the trip once instead of three times. This is the most physical of the three optimizations, the one that is really about doing more math per byte moved. Triton is how you write one of these without dropping all the way to CUDA C: you describe the tiling and the memory pattern, and it generates the kernel.</p>
+
+            <p>A JIT compiler goes after dispatch, and along the way it writes most of your fused kernels for you. When you wrap a model in <code>torch.compile</code>, Inductor traces the graph and, instead of launching a hundred separate eager operations through the Python interpreter and the dispatcher, it fuses what it can and emits kernels. The part worth internalizing is that those emitted kernels <em>are</em> Triton. Turn on <code>max_autotune</code> and it tunes them; turn on <code>epilogue_fusion</code> and it folds the pointwise tail of an operation into the matmul that came before it. So you rarely hand-write Triton and separately switch on the compiler. The compiler writes the Triton, and you hand-write only the few kernels it cannot discover on its own.</p>
+
+            <p>A CUDA graph goes after launch overhead. Even after everything is fused, every remaining kernel still costs the CPU something to launch: assemble the arguments, tell the driver, enqueue the work. On a large model that cost is noise. On a small model running at single-digit milliseconds on an edge GPU, the CPU launching a few hundred kernels can become the bottleneck, with the GPU sitting idle between launches waiting for the CPU to catch up. A CUDA graph records the entire sequence of launches one time and lets you replay all of it with a single call, so the GPU stops waiting on the CPU to hand it the next thing.</p>
+
+            <p>Three bills: memory traffic, dispatch, launch. Three tools, one each. Once it is laid out like that, the question of which one is best simply dissolves. On a small real-time model you usually want all three, because you are being charged on all three lines at once.</p>
+
+            <h2>How they stack</h2>
+
+            <p>They compose, and the composition is a stack rather than a menu. At the bottom are fused kernels. In the middle is the compiler that discovers and generates most of those kernels for you. On top is the graph that freezes the launch schedule of whatever the compiler produced. <code>torch.compile</code> even hands you the top layer directly: <code>mode="reduce-overhead"</code> means compile the model and then wrap the result in CUDA graphs. When it works, one line gives you all three.</p>
+
+            <p>There is also a fourth moment, later than the run itself, which is deployment. AOTInductor takes the compiled graph and bakes it ahead of time into a standalone <code>.pt2</code> that loads from C++ with no Python interpreter anywhere in sight. On the robot this matters more than it sounds. The thing running on the Jetson is not my training code with the compiler warming up on the first few frames. It is a frozen artifact that did all of its compiling back on my desk. The compiler ran once, weeks earlier, and the deployment just replays what it produced.</p>
+
+            <h2>The tax is staticness</h2>
+
+            <p>This is where the currency shows up, and it shows up as a ladder. Each layer you add demands that more about the workload be fixed before the hot loop begins.</p>
+
+            <p>A fused kernel fixes the computation. It is written for a particular pattern of operations and a particular regime of shapes, and it does that one thing well.</p>
+
+            <p>A JIT compile fixes the shapes, softly. Inductor specializes on the shapes it actually saw, and a new shape trips a guard and triggers a recompile. You can ask for dynamic shapes and it will insert symbolic guards instead, but the guards cost something, and the more you let vary, the less there is to specialize on.</p>
+
+            <p>A CUDA graph fixes the shapes and the memory addresses, hard. This is the strictest rung by a wide margin. A graph does not merely assume the shapes match on replay. It assumes the tensors live at the same addresses. That is why capturing one looks the way it does: you allocate a static input buffer once, warm up on a side stream, capture the forward pass into the graph, and from then on you copy each new input into that same buffer and call replay. There is no room for a tensor whose size changed between calls. You capture once and replay forever, or you throw the graph away and capture again from scratch.</p>
+
+            <p>So the ladder reads: fix the math, fix the shapes, fix the memory. Every rung buys back a different overhead, and every rung takes away a different freedom.</p>
+
+            <h2>Where it collides with sparse inference</h2>
+
+            <p>Now the problem I actually had. The entire point of the depth model was that it is sparse. It predicts depth only at queried points instead of across the full image, and that is where its 3.2&times; reduction in FLOPs comes from. But queried points means a variable number of them. The count changes from one query to the next. A variable count is a dynamic shape, and a dynamic shape is precisely the thing every rung of the ladder is built to forbid.</p>
+
+            <p>It gets worse before it gets better, because the obvious way to do sparse attention is the wrong way. You keep the full set of tokens and hand the attention a mask. I tried exactly that. PyTorch's scaled-dot-product attention with an <code>attn_mask</code> does not exploit the sparsity at all. It computes the full N&times;N attention and then applies the mask, so you pay for the entire dense computation and then pay a little more for the masking on top. The mask made the model slower, not faster. And a masked, variable-structure computation is unfusable and uncapturable for the same reason it is slow. Nothing about it is static.</p>
+
+            <h2>Packing buys the staticness back</h2>
+
+            <p>The move that worked is almost embarrassing once you can see the tax you were paying. Do not express sparsity as a mask over a big dense tensor. Express it as a small dense tensor. Drop the tokens you do not want entirely, pack the ones you do keep, plus a handful of fixed anchor tokens so the packed set can still see global context, into one contiguous buffer, and run an ordinary dense forward pass over that.</p>
+
+            <p>Look at what that does to the ladder. The computation is dense again, so it fuses. The packed buffer has a fixed size, so it captures into a graph and compiles without tripping guards on every call. The sparsity still buys the FLOP reduction, because the packed set genuinely is smaller than the full image. Packing buys back the staticness that lets compile, capture, and fuse apply at all. The sparsity and the systems stack stop fighting each other, and the speedup that lived only on paper shows up on the clock, a little over 2&times; in my measurements.</p>
+
+            <p>That is the sentence I wish I had taped to the wall at the start. Sparsity that stays dynamic is a FLOP win the hardware refuses to cash. Sparsity you can pack into a fixed shape is a FLOP win you actually get to keep. There is a real accuracy cost to dropping tokens, and most of the research is in choosing which points to keep so the packed set stays faithful to the dense answer, but the systems lesson is clean on its own.</p>
+
+            <h2>When the layers don't compose</h2>
+
+            <p>I should be honest that the stack gets less robust the higher you climb. At one point I had the depth model compiling fine, switched on the reduce-overhead path to pick up CUDA graphs for free, and it broke, in the particular way graph capture breaks when something in the model does not want to be captured. I did not chase it all the way down. I dropped back to plain autocast for that model, kept a hand-managed graph only where I actually needed one, and moved on. The lesson was not that CUDA graphs are bad. It was that each layer you add is one more assumption about how static the model is willing to be, and models built for research do not always hold that still. The higher rungs demand more and give more, and sometimes the honest move is to take the two rungs that compose cleanly and leave the third.</p>
+
+            <h2>The clock, not the trick</h2>
+
+            <p>Strip the names off and all three are one idea. Do the variable, expensive, decision-heavy work at an earlier clock, so that the hot loop is left with only the fixed, cheap, arithmetic work. The compiler discovers the fusions before the loop. The graph schedules the launches before the loop. The fused kernel settles its memory plan before the loop. AOTInductor pushes the whole thing back to a clock weeks before the robot ever boots. Partial evaluation is the old name for this: freeze everything you can know early, and whatever is left at run time is smaller and quicker.</p>
+
+            <p>Which quietly reframes the design question. It is not which optimization to turn on. It is what this workload is actually allowed to change at run time, and what can be frozen before then. Everything you can freeze, some rung of the ladder will turn into speed. Everything that has to stay free, like the count of queried points, is a place none of the rungs can reach, until you find a way, like packing, to make it static again without giving up the thing that made it worth doing. The fastest version of a model is usually not the one with the cleverest kernel. It is the one that has decided, honestly, how little it needs to keep flexible.</p>
+
+            <p>On the Jetson there is no compiler, no Python, and about two milliseconds. Everything that can be decided early has to have been decided already. The <code>.pt2</code> I ship is the whole stack frozen solid, and the only work left for run time is the arithmetic. That is the entire game. Get everything that can be settled early settled early, so the hot path has nothing to do but compute.</p>
+
+            <hr aria-hidden="true">
+
+            <nav class="essay-nav">
+                <p><a href="../index.html">&larr; back</a></p>
+            </nav>
+
+        </article>
+    </main>
+</body>
+</html>

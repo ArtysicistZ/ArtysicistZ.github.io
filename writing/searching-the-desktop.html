@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why we searched the desktop instead of rewarding the agent — Yincheng Zhou</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <article class="essay">
+
+            <header>
+                <h1>Why we searched the desktop instead of rewarding the agent</h1>
+                <p class="essay-meta">July&nbsp;2026 &middot; ~&nbsp;9&nbsp;min read</p>
+            </header>
+
+            <p>The task was to teach a seven-billion-parameter model to use a real Linux desktop. It clicks, types, drags, and waits, one action at a time, until it finishes something like renaming a file or reformatting a slide. The goal sits dozens of steps away, and the only honest verdict comes at the very end, when the environment's own checker looks at the result and says yes or no. The usual way to train something like this is reinforcement learning, so that is what we tried first. What I remember most from those early weeks is watching the GPU hours drain into trajectories the model barely learned anything from. <a href="https://arxiv.org/abs/2606.22948">ENVS</a>, the method we ended up with, came out of taking that waste seriously instead of tuning around it.</p>
+
+            <p>Here is what the waste looked like. You start from a mediocre policy and a reward that only shows up at the finish line, and most rollouts just fail. A failed forty-step tour of a spreadsheet is an expensive way to learn that clicking around a spreadsheet does not rename a file. The rare success was almost worse. That single bit of reward at the end had to be spread back across all forty decisions, so thinly that the update could barely tell which click actually mattered. We were paying for real desktops, real rendering, and real time, and getting back a signal that arrived faint and late.</p>
+
+            <h2>What we were short of</h2>
+
+            <p>The reframe, when it finally came, was not really a new idea. It was a change in what I was counting. The thing we were short of was not compute, and it was not data. I could generate rollouts until the cluster fell over. What was scarce was one very specific thing: a trajectory that actually finished the task and was not just a copy of one we already had. The environment produced those rarely, and reinforcement learning spent most of its budget rediscovering that bad paths are bad, instead of holding onto the good paths on the rare occasion it found one.</p>
+
+            <p>I have never really shaken the olympiad habit of asking what a system is actually limited by before I write anything down. What is conserved, what is fighting you, where the budget really goes. Here the limit was a verified success we had not already seen. So we stopped trying to make the reward loop more efficient and built the whole thing around that one scarce object. When the environment hands you a trajectory that works, keep it, and never burn compute proving the same failure twice.</p>
+
+            <h2>Searching, then training</h2>
+
+            <p>That split the problem in two. Find the good trajectories first, then fit the model to them. It sounds like a bookkeeping decision. It changed where every dollar went.</p>
+
+            <p>The search runs on live desktops. We reset a batch of identical VMs to the same starting state, drive one of them forward, and at each step sample a handful of candidate actions from the frozen policy. Then we ask a blunt question: are these actually different moves, or the same move with a little jitter? The model loves to emit near-duplicate clicks, so "different" needs a definition sharp enough to survive that. Each action gets reduced to a fingerprint: its type, plus, for anything with a coordinate, the click snapped to a fifty-pixel grid. Two clicks in the same cell count as the same strategy. A click and a hotkey do not. We bucket the candidates by fingerprint, keep exploring the buckets the model proposes again and again, and drop the long tail of one-offs. What earns a branch is agreement, not novelty.</p>
+
+            <p>My favorite part is the part the environment refused to make easy. You cannot cheaply fork a running desktop. There is no snapshot of a live GNOME session you can hand to a second worker and say "continue from here." So a branch does not fork. It grabs a fresh VM and replays the parent's actions, click by click, until the desktop is back in the exact state it branched from, and only then does it strike off in a new direction. The tree is real, but every node past the first one is rebuilt by re-driving a desktop from the start. State that a normal tree search gets for free costs a full replay here, and we designed the whole budget around that.</p>
+
+            <p>Verification is the one place we refused to guess. Every leaf gets scored by OSWorld's own task checker. Did the file actually get renamed, yes or no. There is no learned reward model standing in for the truth, so there is nothing for the policy to quietly game. The ground truth is the real state of the machine, and only the verified successes make it into training.</p>
+
+            <p>After all of that, the training is almost boring, which is the point. Take the verified trajectories, train each shared step only once (the tree shares its opening moves, and without this we would drill them half to death), lean the gradient toward the tasks that were hardest to solve, and fine-tune for a single epoch. The expensive thinking already happened during the search. The fit is just the fit.</p>
+
+            <h2>The desktop the GPU wouldn't draw</h2>
+
+            <p>None of this exists unless you can run a lot of real desktops at once, and our cluster's GPUs had no way to draw a screen. They were compute cards, meant for inference, with no display path at all. So the desktops render on the CPU instead. A dummy X server paints into a framebuffer at a resolution no monitor will ever show, and because the GPUs cannot help, the drawing happens in software. Getting a desktop built for one person to run headless and without a GPU, a hundred and ninety times over, took most of a month, and I wrote the long version of that fight up on its own, in <a href="desktop-waiting-for-a-human.html">On the desktop that kept waiting for a human</a>.</p>
+
+            <p>It is the same move as the trajectory one, a level down. The thing binding us was GPU rendering we did not have. The answer was to find the substitution that keeps the result correct and only spends the resource we could spare, which was CPU. Name what you are short of, then build so you waste none of it.</p>
+
+            <h2>What the trade costs</h2>
+
+            <p>I would distrust this whole essay if it told you search beats reinforcement learning in general, so let me be clear about what we gave up.</p>
+
+            <ul>
+                <li><strong>On-policy correction.</strong> We train on successes the model did not produce itself. The gap between the policy that did the searching and the policy we are training is a real distribution shift, and you have to watch it. Reinforcement learning closes that gap on its own, because it only ever learns from its own behavior.</li>
+                <li><strong>The information in a near-miss.</strong> We keep the wins and throw the failures away. But "almost, except for this one step" is a gradient that reinforcement learning happily uses and we simply discard. That is only a smart trade when failures are as cheap in signal as they are expensive in compute, which over a long horizon with a reward only at the end, they are.</li>
+            </ul>
+
+            <p>It worked for us because a verified, distinct success really was the thing we were starving for. On a short task with a dense reward, where every failed step already tells you something, I would expect the math to flip, and I would reach for reinforcement learning again. It is not that search is better. It just fit what this particular problem was missing.</p>
+
+            <h2>The judgment underneath</h2>
+
+            <p>The numbers landed where the accounting said they would. 30.3 against 26.7 for a matched RL baseline, at roughly three-quarters of the GPU hours, and just thirty percent of the collected trajectories was already enough to beat that baseline. That last number is really the scarcity showing up on the ledger. If verified distinct successes are what matter, a small pile of them should go a long way, and it did.</p>
+
+            <p>What stays with me is not the algorithm, which is mostly careful bookkeeping around one observation. It is how much of the work turned out to be figuring out what was scarce and then refusing to waste it. The verified successes, the rendering we could not do on the GPU, the shared opening steps that only deserved to be learned once. Get that judgment right and the method mostly writes itself. Get it wrong and no amount of tuning the reward saves you the compute you never quite notice you are burning. It is the magnet in the copper tube again. Look at what the system is actually doing before you reach for the equation.</p>
+
+            <hr aria-hidden="true">
+
+            <nav class="essay-nav">
+                <p><a href="../index.html">&larr; back</a></p>
+            </nav>
+
+        </article>
+    </main>
+</body>
+</html>
